@@ -23,6 +23,10 @@ router.post("/register", (req, res) => {
   });
 });
 
+router.get("/validateAuth", validateToken, (req, res) => {
+  res.json(req.user);
+});
+
 router.post("/login", (req, res) => {
   const { username, password } = req.body;
   const query = "select * from account where username = ?";
