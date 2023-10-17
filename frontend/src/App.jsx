@@ -3,14 +3,14 @@ import { ColorModeContext, useMode } from "./theme";
 import Topbar from "./pages/global/Topbar";
 import Sidebar from "./pages/global/Sidebar";
 import Dashboard from "./pages/dashboard";
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+
 /*
 import Team from "./pages/team";
 import Contacts from "./pages/contacts";
 import FAQ from "./pages/faq";
 */
 function App() {
-
   const [theme, colorMode] = useMode();
 
   return (
@@ -18,12 +18,11 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          <Sidebar /> 
+          <Sidebar />
           <main className="content">
             <Topbar />
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              
             </Routes>
           </main>
         </div>
@@ -32,4 +31,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
