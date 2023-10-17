@@ -1,129 +1,17 @@
-/*
 import { useState } from "react";
-import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
-//import { Link } from "react-router-dom";
-import { tokens } from "../../theme";
-// import "react-pro-sidebar/dist/css/styles.css";
-// import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-// import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-// import MoveItomOutlinedIcon from "@mui/icons-material/MoveItemOutlined";
-// import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-// import DomainOutlinedIcon from "@mui/icons-material/DomainOutlined";
-// import NoteOutlinedIcon from "@mui/icons-material/NoteOutlined";
-// import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-
-const Sidebar = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  //const [selected, setSelected] = useState("Dashboard");
-
-  return (
-    <Box
-      sx={{
-        "& .pro-sidebar-inner": {
-          background: `${colors.primary[400]} !important`,
-        },
-        "& .pro-icon-wrapper": {
-          backgroundColor: "transparent !important",
-        },
-        "& .pro-inner-item": {
-          padding: "5px 35px 5px 20px !important",
-        },
-        "& .pro-inner-item:hover": {
-          color: "#868dfb !important",
-        },
-        "& .pro-menu-item.active": {
-          color: "#6870fa !important",
-        },
-      }}
-    >
-      <ProSidebar collapsed={isCollapsed}>
-        <Menu iconShape="square">
-          <MenuItem
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
-            style={{
-              margin: "10px 0 20px 0",
-              color: colors.grey[100],
-            }}
-          >
-            {!isCollapsed && (
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                ml="15px"
-              >
-                <Typography variant="h3" color={colors.grey[100]}>
-                  ADMINIS
-                </Typography>
-                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                  <MenuOutlinedIcon />
-                </IconButton>
-              </Box>
-            )}
-          </MenuItem>
-
-          {!isCollapsed && (
-            <Box mb="25px">
-              <Box display="flex" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  src={`../../assets/user.png`}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
-                />
-              </Box>
-              <Box textAlign="center">
-                <Typography
-                  variant="h2"
-                  color={colors.grey[100]}
-                  fontWeight="bold"
-                  sx={{ m: "10px 0 0 0" }}
-                >
-                  Smith Jones
-                </Typography>
-                <Typography variant="h5" color={colors.greenAccent[500]}>
-                  HR Administrator
-                </Typography>
-              </Box>
-            </Box>
-          )}
-        </Menu>
-      </ProSidebar>
-    </Box>
-  );
-};
-
-
-const Sidebar = () => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
-
-export default Sidebar;
-*/
-
-import { useState } from "react";
-//import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
-//import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
+import Diversity3OutlinedIcon from "@mui/icons-material/Diversity3Outlined";
+import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
+import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
+import PersonAddAlt1OutlinedIcon from "@mui/icons-material/PersonAddAlt1Outlined";
+import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -177,7 +65,7 @@ const Sidebar1 = () => {
             onClick={() => setIsCollapsed(!isCollapsed)}
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
-              margin: "10px 0 20px 0",
+              margin: "5px 0 20px 0",
               color: colors.grey[100],
             }}
           >
@@ -203,7 +91,7 @@ const Sidebar1 = () => {
                   width="100px"
                   height="100px"
                   src="src/assets/user.png"
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
+                  style={{ borderRadius: "50%" }}
                 />
               </Box>
               <Box textAlign="center">
@@ -222,7 +110,7 @@ const Sidebar1 = () => {
             </Box>
           )}
 
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+          <Box paddingLeft={isCollapsed ? undefined : "7%"}>
             <Item
               title="Dashboard"
               to="/"
@@ -239,23 +127,23 @@ const Sidebar1 = () => {
               Employee
             </Typography>
             <Item
-              title="Personal Information"
-              to="/team"
-              icon={<PeopleOutlinedIcon />}
+              title="Profile"
+              to="/profile"
+              icon={<PersonOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Emergency Details"
               to="/contacts"
-              icon={<ContactsOutlinedIcon />}
+              icon={<CallOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Depenedent Details"
-              to="/invoices"
-              icon={<ReceiptOutlinedIcon />}
+              to="/dependentdetails"
+              icon={<Diversity3OutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -263,14 +151,14 @@ const Sidebar1 = () => {
             <Typography
               variant="h6"
               color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
+              sx={{ m: "10px 0 5px 20px" }}
             >
               Leave
             </Typography>
             <Item
               title="Leave Form"
-              to="/form"
-              icon={<PersonOutlinedIcon />}
+              to="/leaveform"
+              icon={<ExitToAppOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -278,7 +166,7 @@ const Sidebar1 = () => {
             <Typography
               variant="h6"
               color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
+              sx={{ m: "10px 0 5px 20px" }}
             >
               Team
             </Typography>
@@ -292,8 +180,8 @@ const Sidebar1 = () => {
 
             <Item
               title="Add Employee"
-              to="/invoices"
-              icon={<ReceiptOutlinedIcon />}
+              to="/addemployee"
+              icon={<PersonAddAlt1OutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -301,14 +189,14 @@ const Sidebar1 = () => {
             <Typography
               variant="h6"
               color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
+              sx={{ m: "10px 0 5px 20px" }}
             >
               Department
             </Typography>
             <Item
               title="Add Department"
-              to="/team"
-              icon={<PeopleOutlinedIcon />}
+              to="/department"
+              icon={<BusinessOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -316,14 +204,14 @@ const Sidebar1 = () => {
             <Typography
               variant="h6"
               color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
+              sx={{ m: "10px 0 5px 20px" }}
             >
               Report
             </Typography>
             <Item
               title="Generate Report"
-              to="/team"
-              icon={<PeopleOutlinedIcon />}
+              to="/report"
+              icon={<ArticleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

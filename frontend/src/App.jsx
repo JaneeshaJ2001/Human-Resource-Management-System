@@ -2,14 +2,10 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Topbar from "./pages/global/Topbar";
 import Sidebar from "./pages/global/Sidebar";
-import Dashboard from "./pages/dashboard";
+import Dashboard from "./pages/dashboard/Dashboard";
+import WidgetLg from "./pages/team/WidgetLg";
 import { Routes, Route } from "react-router-dom";
 
-/*
-import Team from "./pages/team";
-import Contacts from "./pages/contacts";
-import FAQ from "./pages/faq";
-*/
 function App() {
   const [theme, colorMode] = useMode();
 
@@ -23,6 +19,7 @@ function App() {
             <Topbar />
             <Routes>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/team" element={<WidgetLg />} />
             </Routes>
           </main>
         </div>
