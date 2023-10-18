@@ -1,10 +1,10 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { tokens } from "../../theme";
-import { mockDataTeam } from "../../data/mockData";
-import Header from "../../components/Header";
+import { DataGrid } from "@mui/x-data-grid";
+import { tokens } from "../../../theme";
+import { mockDataLeaveForm } from "../../../data/mockData";
+import Header from "../../../components/Header";
 
-const Team = () => {
+const LeaveForm = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const columns = [
@@ -23,56 +23,49 @@ const Team = () => {
       cellClassName: "name-column--cell",
     },
     {
+      field: "relationship",
+      headerName: "Relationship",
+      cellClassName: "name-column--cell",
+    },
+    {
       field: "address",
       headerName: "Address",
       flex: 2,
       cellClassName: "name-column--cell",
     },
+
     {
-      field: "maritalStatus",
-      headerName: "Marital Status",
-      cellClassName: "name-column--cell",
-    },
-    {
-      field: "dob",
-      headerName: "DOB",
+      field: "mobilePhone",
+      headerName: "Mobile Phone",
       flex: 1,
       cellClassName: "name-column--cell",
     },
     {
-      field: "gender",
-      headerName: "Gender",
+      field: "homePhone",
+      headerName: "Home Phone",
       flex: 1,
       cellClassName: "name-column--cell",
     },
 
     {
-      field: "department",
-      headerName: "Department",
+      field: "edditedBy",
+      headerName: "Edited By",
       flex: 1,
       cellClassName: "name-column--cell",
     },
     {
-      field: "designation",
-      headerName: "Designation",
+      field: "date",
+      headerName: "Date",
       flex: 1,
       cellClassName: "name-column--cell",
     },
+
     {
-      field: "payGrade",
-      headerName: "Pay Grade",
-      type: "number",
-      headerAlign: "left",
-      align: "left",
-      cellClassName: "name-column--cell",
-      flex: 0.8,
-    },
-    {
-      field: "status",
-      headerName: "Status",
+      field: "action",
+      headerName: "Action",
 
       flex: 1,
-      renderCell: ({ row: { status } }) => {
+      renderCell: ({ row: { action } }) => {
         return (
           <Box
             width="75%"
@@ -82,12 +75,12 @@ const Team = () => {
             justifyContent="center"
             borderRadius="15px"
             backgroundColor={
-              status === "active"
+              action === "active"
                 ? colors.greenAccent[600]
                 : colors.redAccent[600]
             }
           >
-            <Typography color={colors.grey[100]}>{status}</Typography>
+            <Typography color={colors.grey[100]}>{action}</Typography>
           </Box>
         );
       },
@@ -96,10 +89,10 @@ const Team = () => {
 
   return (
     <Box m="20px">
-      <Header title="TEAM" />
+      <Header title="Leave History" />
       <Box
         m="40px 0 0 0"
-        height="75vh"
+        height="42vh"
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
@@ -124,19 +117,12 @@ const Team = () => {
           "& .MuiCheckbox-root": {
             color: `${colors.greenAccent[200]} !important`,
           },
-          "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-            color: `${colors.grey[100]} !important`,
-          },
         }}
       >
-        <DataGrid
-          rows={mockDataTeam}
-          columns={columns}
-          components={{ Toolbar: GridToolbar }}
-        />
+        <DataGrid rows={mockDataLeaveForm} columns={columns} />
       </Box>
     </Box>
   );
 };
 
-export default Team;
+export default LeaveForm;
