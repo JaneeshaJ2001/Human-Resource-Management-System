@@ -32,6 +32,8 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
+// const [role, setRole] = useState("admin");
+
 const Sidebar1 = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -104,7 +106,7 @@ const Sidebar1 = () => {
                   John Smith
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  Admin
+                  admin
                 </Typography>
               </Box>
             </Box>
