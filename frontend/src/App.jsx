@@ -9,6 +9,7 @@ import Contact from "./pages/emergencyContact/contact";
 import Dependent from "./pages/dependent/Dependent";
 import LeaveForm from "./pages/leave/leaveForm/LeaveForm";
 import Department from "./pages/department/Department";
+import FeaturedInfo from "./components/featuredInfo/FeaturedInfo";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -28,6 +29,7 @@ function App() {
               <Route path="/dependent" element={<Dependent />} />
               <Route path="/leave" element={<LeaveForm />} />
               <Route path="/department" element={<Department />} />
+              <Route path="/info" element={<FeaturedInfo />} />
             </Routes>
           </main>
         </div>
