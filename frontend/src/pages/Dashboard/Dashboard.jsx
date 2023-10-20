@@ -1,7 +1,20 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 function Dashboard() {
-  return <Typography variant="h1">Dashboard</Typography>;
+  return (
+    <Box>
+      <Typography sx={styles.pageTitle} variant="h5">
+        Dashboard
+      </Typography>
+    </Box>
+  );
 }
 
 export default Dashboard;
+
+/** @type {import("@mui/material").SxProps} */
+const styles = {
+  pageTitle: {
+    mb: 2,
+  },
+};

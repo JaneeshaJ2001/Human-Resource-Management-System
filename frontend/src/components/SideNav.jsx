@@ -10,7 +10,6 @@ import {
 } from "@mui/icons-material";
 import { useTheme } from "@emotion/react";
 import { Link, useLocation } from "react-router-dom";
-import theme from "../config/theme";
 
 function SideNav() {
   const { collapsed } = useProSidebar();
@@ -84,8 +83,8 @@ function SideNav() {
         </MenuItem>
 
         <MenuItem
-          active={location.pathname === "/employee"}
-          component={<Link to="/employee" />}
+          active={location.pathname === "/Employee"}
+          component={<Link to="/Employee" />}
           icon={<PeopleOutlineOutlined />}
         >
           <Typography variant="body2"> Employees </Typography>
