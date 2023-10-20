@@ -8,12 +8,12 @@ dotenv.config();
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
 router.post("/register", (req, res) => {
-  const { username, password, emp_id, job_id } = req.body;
+  const { username, password, emp_id, role_id } = req.body;
   const query =
-    "insert into account (username,password,emp_id,job_id) values (?,?,?,?)";
+    "insert into account (username,password,emp_id,role_id) values (?,?,?,?)";
 
   bcrypt.hash(password, 10).then((hashedPassword) => {
-    db.query(query, [username, hashedPassword, emp_id, job_id], (err, data) => {
+    db.query(query, [username, hashedPassword, emp_id, role_id], (err, data) => {
       if (err) {
         res.json({ error: err });
       } else {
@@ -42,13 +42,13 @@ router.post("/login", (req, res) => {
             res.json({ error: "wrong username or password" });
           } else {
             const accessToken = sign(
-              { username: username, emp_id: data[0].emp_id },
+              { username: username, role_id: data[0].role_id },
               process.env.JWT_SECRET
             );
             res.json({
               accessToken: accessToken,
               username: username,
-              emp_id: data[0].emp_id,
+              role_id: data[0].role_id,
             });
           }
         });
