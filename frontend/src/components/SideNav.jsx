@@ -10,6 +10,7 @@ import {
 } from "@mui/icons-material";
 import { useTheme } from "@emotion/react";
 import { Link, useLocation } from "react-router-dom";
+import React from "react";
 
 function SideNav() {
   const { collapsed } = useProSidebar();

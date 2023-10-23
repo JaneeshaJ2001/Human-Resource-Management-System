@@ -3,6 +3,7 @@ import TabPanel from "../../components/TabPanel";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
 import { mockDataLeaveHistory } from "../../data/MockData2";
+import React from "react";
 
 const columns1 = [
   {

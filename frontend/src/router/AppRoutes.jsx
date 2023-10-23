@@ -10,17 +10,18 @@ import ForgotPassword from "../pages/login/ForgotPassword";
 import { Routes, Route } from "react-router-dom";
 //<Route exact path="/login" element={<Login />} />
 //<Route exact path="/forgotpassword" element={<ForgotPassword />} />
+import React from "react";
 
 function AppRoutes() {
   return (
     <Routes>
-      <Route exact path="/" element={<Dashboard />} />
+      <Route path="/" element={<Dashboard />} />
       <Route path="/profile" element={<Profile />} />
-      <Route exact path="/leave" element={<Leave />} />
-      <Route exact path="/employee" element={<Employee />} />
-      <Route exact path="/department" element={<Department />} />
-      <Route exact path="/document" element={<Document />} />
-      <Route exact path="/addemp" element={<AddEmployee />} />
+      <Route path="/leave" element={<Leave />} />
+      <Route path="/employee" element={<Employee />} />
+      <Route path="/department" element={<Department />} />
+      <Route path="/document" element={<Document />} />
+      <Route path="/addemp" element={<AddEmployee />} />
     </Routes>
   );
 }

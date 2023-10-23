@@ -4,6 +4,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useProSidebar } from "react-pro-sidebar";
+import React from "react";
 
 function AppHeader() {
   const { collapseSidebar, toggleSidebar, broken } = useProSidebar();

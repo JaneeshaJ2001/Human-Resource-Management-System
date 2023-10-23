@@ -1,4 +1,3 @@
-import * as React from "react";
 import {
   Avatar,
   Button,
@@ -10,6 +9,7 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import React from "react";
 
 const defaultTheme = createTheme();
 

@@ -9,7 +9,7 @@ import theme from "./config/theme";
 import AppHeader from "./components/AppHeader";
 import SideNav from "./components/SideNav";
 import AppRoutes from "./router/AppRoutes";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes } from "react-router-dom";
 
 function App() {
   return (
@@ -19,12 +19,10 @@ function App() {
           <CssBaseline />
           <AppHeader />
           <Box sx={styles.container}>
-            <BrowserRouter>
-              <SideNav />
-              <Box component={"main"} sx={styles.mainSection}>
-                <AppRoutes />
-              </Box>
-            </BrowserRouter>
+            <SideNav />
+            <Box component={"main"} sx={styles.mainSection}>
+              <AppRoutes />
+            </Box>
           </Box>
         </ProSidebarProvider>
       </ThemeProvider>
