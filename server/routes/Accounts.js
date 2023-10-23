@@ -20,7 +20,7 @@ router.post("/register", (req, res) => {
         if (err) {
           res.json({ error: err });
         } else {
-          res.json("user added successfully");
+          res.json({ success: "user added successfully" });
         }
       }
     );
