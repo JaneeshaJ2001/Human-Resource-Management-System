@@ -13,13 +13,17 @@ router.post("/register", (req, res) => {
     "insert into account (username,password,emp_id,role_id) values (?,?,?,?)";
 
   bcrypt.hash(password, 10).then((hashedPassword) => {
-    db.query(query, [username, hashedPassword, emp_id, role_id], (err, data) => {
-      if (err) {
-        res.json({ error: err });
-      } else {
-        res.json("user added successfully");
+    db.query(
+      query,
+      [username, hashedPassword, emp_id, role_id],
+      (err, data) => {
+        if (err) {
+          res.json({ error: err });
+        } else {
+          res.json("user added successfully");
+        }
       }
-    });
+    );
   });
 });
 
@@ -42,12 +46,17 @@ router.post("/login", (req, res) => {
             res.json({ error: "wrong username or password" });
           } else {
             const accessToken = sign(
-              { username: username, role_id: data[0].role_id },
+              {
+                username: username,
+                emp_id: data[0].emp_id,
+                role_id: data[0].role_id,
+              },
               process.env.JWT_SECRET
             );
             res.json({
               accessToken: accessToken,
               username: username,
+              emp_id: data[0].emp_id,
               role_id: data[0].role_id,
             });
           }

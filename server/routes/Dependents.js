@@ -5,55 +5,43 @@ const dotenv = require("dotenv");
 dotenv.config();
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
-router.post("/", (req, res) => {
+router.post("/", validateToken, (req, res) => {
   const {
-    first_name,
-    last_name,
+    name,
     birth_date,
+    gender,
+    relationship,
     PB_number,
     street_name,
     city_name,
     country,
-    branch_name,
-    job_title,
-    pay_grade,
-    dept_name,
-    emp_status_name,
-    SupervisorId,
-    marital_status,
   } = req.body;
-  const query =
-    "call add_employee(?,?,?,?,?,?,?,?,?,?,?,?,?,?,@emp_id); select @emp_id as emp_id;";
+  const query = "call add_dependent(?,?,?,?,?,?,?,?,?)";
   db.query(
     query,
     [
-      first_name,
-      last_name,
+      name,
       birth_date,
+      gender,
+      relationship,
+      req.user.emp_id,
       PB_number,
       street_name,
       city_name,
       country,
-      branch_name,
-      job_title,
-      pay_grade,
-      dept_name,
-      emp_status_name,
-      SupervisorId,
-      marital_status,
     ],
     (err, data) => {
       if (err) {
-        res.json(err);
+        res.json({ error: err });
       } else {
-        res.json(data[1][0]);
+        res.json({ success: "dependent added successfully" });
       }
     }
   );
 });
 
 router.get("/", validateToken, (req, res) => {
-  const query = "select * from employee_info_view";
+  const query = "select * from dependent";
   db.query(query, (err, data) => {
     if (err) {
       res.json({ error: err });
@@ -64,7 +52,7 @@ router.get("/", validateToken, (req, res) => {
 });
 
 router.get("/byId/:emp_id", validateToken, (req, res) => {
-  const query = "select * from employee_info_view where emp_id = ?";
+  const query = "select * from dependent where emp_id = ?";
   db.query(query, [req.params.emp_id], (err, data) => {
     if (err) {
       res.json({ error: err });
@@ -74,60 +62,49 @@ router.get("/byId/:emp_id", validateToken, (req, res) => {
   });
 });
 
-router.get("/bySupervisorId/:supervisor_id", validateToken, (req, res) => {
-  const query = "select * from employee_info_view where SupervisorId = ?";
-  db.query(query, [req.params.supervisor_id], (err, data) => {
+router.delete("/", validateToken, (req, res) => {
+  const query = "delete from dependent where dependent_id = ?";
+  db.query(query, [req.body.dependent_id], (err, data) => {
     if (err) {
       res.json({ error: err });
     } else {
-      res.json(data);
+      res.json({ success: "dependent deleted successfully" });
     }
   });
 });
 
 router.put("/", validateToken, (req, res) => {
   const {
-    emp_id,
-    first_name,
-    last_name,
+    dependent_id,
+    name,
     birth_date,
+    gender,
+    relationship,
     PB_number,
     street_name,
     city_name,
     country,
-    branch_name,
-    job_title,
-    pay_grade,
-    dept_name,
-    emp_status_name,
-    SupervisorId,
-    marital_status,
   } = req.body;
-  const query = "call update_employee(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+  const query = "call update_dependent(?,?,?,?,?,?,?,?,?,?)";
   db.query(
     query,
     [
-      emp_id,
-      first_name,
-      last_name,
+      dependent_id,
+      name,
       birth_date,
+      gender,
+      relationship,
+      req.user.emp_id,
       PB_number,
       street_name,
       city_name,
       country,
-      branch_name,
-      job_title,
-      pay_grade,
-      dept_name,
-      emp_status_name,
-      SupervisorId,
-      marital_status,
     ],
     (err, data) => {
       if (err) {
         res.json({ error: err });
       } else {
-        res.json({ success: "user updated successfully" });
+        res.json({ success: "dependent updated successfully" });
       }
     }
   );
