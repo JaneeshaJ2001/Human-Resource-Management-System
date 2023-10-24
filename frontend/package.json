@@ -12,11 +12,13 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.8",
     "@fullcalendar/core": "^6.1.9",
     "@fullcalendar/daygrid": "^6.1.9",
     "@fullcalendar/list": "^6.1.9",
     "@fullcalendar/timegrid": "^6.1.9",
     "@mui/icons-material": "^5.14.11",
+    "@mui/lab": "^5.0.0-alpha.149",
     "@mui/material": "^5.14.11",
     "@mui/x-data-grid": "^6.16.0",
     "@nivo/bar": "^0.83.0",
