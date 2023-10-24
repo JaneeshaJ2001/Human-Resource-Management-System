@@ -3,6 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataContact } from "../../data/mockData";
 import Header from "../../components/Header";
+import React from "react";
 
 const Dependent = () => {
   const theme = useTheme();

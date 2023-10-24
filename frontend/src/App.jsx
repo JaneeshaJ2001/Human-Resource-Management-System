@@ -2,13 +2,14 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Topbar from "./pages/global/Topbar";
 import Sidebar from "./pages/global/Sidebar";
-import Dashboard from "./pages/dashboard/Dashboard";
 import Team from "./pages/team/Team";
 import { Routes, Route } from "react-router-dom";
 import Contact from "./pages/emergencyContact/contact";
 import Dependent from "./pages/dependent/Dependent";
 import LeaveForm from "./pages/leave/leaveForm/LeaveForm";
 import Department from "./pages/department/Department";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import React from "react";
 
 function App() {
   const [theme, colorMode] = useMode();
