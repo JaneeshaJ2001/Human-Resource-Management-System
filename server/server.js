@@ -17,6 +17,10 @@ const EmergencyContactsRoute = require("./routes/EmergencyContacts");
 app.use("/emergency", EmergencyContactsRoute);
 const LeaveApplicationsRoute = require("./routes/LeaveApplications");
 app.use("/leaveApplication", LeaveApplicationsRoute);
+const DepartmentsRoute = require("./routes/Departments");
+app.use("/department", DepartmentsRoute);
+const LeaveRecordsRoute = require("./routes/LeaveRecords");
+app.use("/leaveRecord", LeaveRecordsRoute);
 
 app.listen(1234, () => {
   console.log("server running on port 1234");
