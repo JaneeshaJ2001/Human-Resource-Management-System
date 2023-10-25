@@ -14,17 +14,22 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React from "react";
+import axios from "axios";
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      username: data.get("username"),
-      password: data.get("password"),
-    });
+    await axios
+      .post("http://localhost:1234/auth/login", {
+        username: data.get("username"),
+        password: data.get("password"),
+      })
+      .then((response) => {
+        console.log(response.data);
+      });
   };
 
   return (
@@ -72,7 +77,14 @@ export default function SignIn() {
               autoComplete="current-password"
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={
+                <Checkbox
+                  name="remember"
+                  id="remember"
+                  value="remember"
+                  color="primary"
+                />
+              }
               label="Remember me"
             />
             <Button

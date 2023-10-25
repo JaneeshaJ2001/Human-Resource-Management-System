@@ -1,9 +1,11 @@
 import { Box, Tab, Tabs, Typography } from "@mui/material";
 import TabPanel from "../../components/TabPanel";
 import { DataGrid } from "@mui/x-data-grid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { mockDataLeaveHistory } from "../../data/MockData2";
 import React from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const columns1 = [
   {
@@ -65,6 +67,26 @@ function Leave() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const { emp_id } = useParams();
+
+  const [leaveDetails, setLeaveDetails] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:1234/leaveApplication/byId/${emp_id}`, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        if (response.data.error) {
+          console.log(response.data.error);
+        } else {
+          setLeaveDetails(response.data);
+        }
+      });
+  }, []);
+
+  // console.log(leaveDetails);
 
   return (
     <Box>

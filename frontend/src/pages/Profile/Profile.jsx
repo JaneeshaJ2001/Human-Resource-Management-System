@@ -1,9 +1,11 @@
 import { Box, Tab, Tabs, Typography } from "@mui/material";
 import TabPanel from "../../components/TabPanel";
 import { DataGrid } from "@mui/x-data-grid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { mockDataContact, mockDataDependent } from "../../data/MockData2";
 import React from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const columns1 = [
   {
@@ -119,6 +121,53 @@ function Profile() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const { emp_id } = useParams();
+
+  const [employeeInfo, setEmployeeInfo] = useState([]);
+  const [emergencyContacts, setEmergencyContacts] = useState([]);
+  const [dependent, setDependent] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:1234/employee/byId/${emp_id}`, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        if (response.error) {
+          console.log(response.error);
+        } else {
+          console.log(response.data); // logging
+          setEmployeeInfo(response.data);
+        }
+      });
+
+    axios
+      .get(`http://localhost:1234/emergency/byId/${emp_id}`, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        if (response.error) {
+          console.log(response.error);
+        } else {
+          console.log(response.data); // logging
+          setEmergencyContacts(response.data);
+        }
+      });
+
+    axios
+      .get(`http://localhost:1234/dependent/byId/${emp_id}`, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        if (response.error) {
+          console.log(response.error);
+        } else {
+          console.log(response.data); // logging
+          setDependent(response.data);
+        }
+      });
+  }, []);
 
   return (
     <Box>

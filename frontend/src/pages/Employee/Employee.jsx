@@ -1,9 +1,10 @@
 import { Box, Tab, Tabs, Typography } from "@mui/material";
 import TabPanel from "../../components/TabPanel";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { mockDataTeam } from "../../data/MockData2";
 import React from "react";
+import axios from "axios";
 
 const columns = [
   {
@@ -71,6 +72,24 @@ function Employee() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const [employees, setEmployees] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:1234/employee", {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        if (response.data.error) {
+          console.log(response.data.error);
+        } else {
+          setEmployees(response.data);
+        }
+      });
+  }, []);
+
+  // console.log(employees);
 
   return (
     <Box>

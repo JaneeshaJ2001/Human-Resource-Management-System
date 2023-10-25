@@ -16,12 +16,14 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Dashboard />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/leave" element={<Leave />} />
-      <Route path="/employee" element={<Employee />} />
-      <Route path="/department" element={<Department />} />
-      <Route path="/document" element={<Document />} />
+      <Route path="/profile/byId/:emp_id" element={<Profile />} /> //checked
+      <Route path="/leave/byId/:emp_id" element={<Leave />} /> //checked
+      <Route path="/employee" element={<Employee />} />  //checked
       <Route path="/addemp" element={<AddEmployee />} />
+      <Route path="/department" element={<Department />}/> // checked
+      <Route path="/document" element={<Document />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
     </Routes>
   );
 }
