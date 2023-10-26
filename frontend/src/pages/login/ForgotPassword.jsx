@@ -56,14 +56,34 @@ export default function SignIn() {
               //autoComplete="email"
               autoFocus
             />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              //autoComplete="current-password"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="confirmpassword"
+              label="Confirm Password"
+              type="password"
+              id="confirmpassword"
+              //autoComplete="current-password"
+            />
 
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 10, mb: 2 }}
+              sx={{ mt: 7, mb: 2 }}
             >
-              Send OTP
+              Submit
             </Button>
           </Box>
         </Box>

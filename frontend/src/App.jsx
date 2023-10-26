@@ -9,7 +9,6 @@ import theme from "./config/theme";
 import AppHeader from "./components/AppHeader";
 import SideNav from "./components/SideNav";
 import AppRoutes from "./router/AppRoutes";
-import { BrowserRouter, Routes } from "react-router-dom";
 
 function App() {
   return (
