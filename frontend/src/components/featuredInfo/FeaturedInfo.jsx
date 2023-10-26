@@ -41,6 +41,18 @@ function FeaturedInfo() {
           <span className="featuredSub">Compared to last month</span>
         </div>
       </div>
+
+      <div className="featuredItem">
+        <span className="featuredTitle">Sales</span>
+        <div className="featuredMoneyContainer">
+          <span className="featuredMoney">$2,415</span>
+          <span className="featuredMoneyRate">
+            -l1.4
+            <ArrowDownwardOutlinedIcon className=" featuredIcon negative" />
+          </span>
+          <span className="featuredSub">Compared to last month</span>
+        </div>
+      </div>
     </div>
   );
 }
