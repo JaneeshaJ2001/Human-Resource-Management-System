@@ -77,22 +77,22 @@ function Leave() {
           <Tab label="Leave Form" id="tab-0" />
           <Tab label="Leave History" id="tab-1" />
         </Tabs>
-
-        <TabPanel value={value} index={0}>
-          <LeaveForm />
-        </TabPanel>
-
-        <TabPanel value={value} index={1}>
-          <DataGrid
-            rows={mockDataLeaveHistory}
-            columns={columns1}
-            PageSize={25}
-            rowsPerPageOption={[25]}
-            autoHeight
-            rowHeight={70}
-          />
-        </TabPanel>
       </Box>
+
+      <TabPanel value={value} index={0}>
+        <LeaveForm />
+      </TabPanel>
+
+      <TabPanel value={value} index={1}>
+        <DataGrid
+          rows={mockDataLeaveHistory}
+          columns={columns1}
+          PageSize={25}
+          rowsPerPageOption={[25]}
+          autoHeight
+          rowHeight={70}
+        />
+      </TabPanel>
     </Box>
   );
 }

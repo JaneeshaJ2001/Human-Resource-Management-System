@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Fab,
   Typography,
   Dialog,
   DialogTitle,
@@ -13,6 +14,18 @@ import React from "react";
 import { useState } from "react";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+
+/*
+<Fab
+        variant="extended"
+        size="medium"
+        color="primary"
+        onClick={() => setOpenPopup(true)}
+      >
+        <AddOutlinedIcon sx={{ mr: 1 }} />
+        Add Department
+      </Fab>
+      */
 
 const columns = [
   {
