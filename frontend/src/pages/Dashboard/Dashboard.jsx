@@ -1,5 +1,8 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Grid, Container } from "@mui/material";
 import React from "react";
+import Chart from "../../components/chart/Chart";
+import FeaturedInfo from "../../components/featuredInfo/FeaturedInfo";
+import { userData } from "../../data/MockData2";
 
 function Dashboard() {
   return (
@@ -7,6 +10,25 @@ function Dashboard() {
       <Typography sx={styles.pageTitle} variant="h5">
         Dashboard
       </Typography>
+
+      <Container maxWidth="lg" sx={{ mt: 3 }}>
+        <Grid container spacing={0.5}>
+          {/* Recent Orders */}
+          <Grid item xs={12}>
+            <FeaturedInfo />
+          </Grid>
+
+          {/* Chart */}
+          <Grid item xs={12}>
+            <Chart
+              data={userData}
+              title="User Analytics"
+              grid
+              dataKey="Active User"
+            />
+          </Grid>
+        </Grid>
+      </Container>
     </Box>
   );
 }

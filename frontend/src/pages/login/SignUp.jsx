@@ -6,6 +6,10 @@ import {
   Box,
   Typography,
   CssBaseline,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -14,7 +18,7 @@ import React from "react";
 
 const defaultTheme = createTheme();
 
-export default function SignIn() {
+export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -22,6 +26,12 @@ export default function SignIn() {
       username: data.get("username"),
       password: data.get("password"),
     });
+  };
+
+  const [role, setRole] = React.useState("");
+
+  const handleChange = (event) => {
+    setRole(event.target.value);
   };
 
   return (
@@ -54,22 +64,21 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Forgot Password
+            Welcome to Jupyter
           </Typography>
           <Box
             component="form"
             onSubmit={handleSubmit}
             noValidate
-            sx={{ mt: 3 }}
+            sx={{ mt: 2 }}
           >
             <TextField
               margin="normal"
               required
               fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              //autoComplete="email"
+              id="id"
+              label="User ID"
+              name="id"
               autoFocus
             />
             <TextField
@@ -80,26 +89,32 @@ export default function SignIn() {
               label="Password"
               type="password"
               id="password"
-              //autoComplete="current-password"
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="confirmpassword"
-              label="Confirm Password"
-              type="password"
-              id="confirmpassword"
-              //autoComplete="current-password"
-            />
+
+            <Grid>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={role}
+                  label="Role"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={1}>HR Manager</MenuItem>
+                  <MenuItem value={2}>Supervisor</MenuItem>
+                  <MenuItem value={3}>Employee</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
 
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 1 }}
+              sx={{ mt: 4, mb: 1 }}
             >
-              Submit
+              Sign Up
             </Button>
           </Box>
         </Grid>

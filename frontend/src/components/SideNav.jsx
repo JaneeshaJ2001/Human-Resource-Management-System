@@ -39,7 +39,12 @@ function SideNav() {
             Smith Jones
           </Typography>
         ) : null}
-        {!collapsed ? <Typography variant="body2"> Admin</Typography> : null}
+        {!collapsed ? (
+          <Typography variant="body2" fontWeight={"bold"}>
+            {" "}
+            Admin
+          </Typography>
+        ) : null}
       </Box>
 
       <Menu
@@ -127,6 +132,7 @@ const styles = {
 
   profileName: {
     mt: 1,
+    fontWeight: "bold",
   },
 };
 

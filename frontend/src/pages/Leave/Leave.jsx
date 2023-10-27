@@ -3,6 +3,7 @@ import TabPanel from "../../components/TabPanel";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
 import { mockDataLeaveHistory } from "../../data/MockData2";
+import LeaveForm from "./LeaveForm";
 import React from "react";
 
 const columns1 = [
@@ -76,20 +77,22 @@ function Leave() {
           <Tab label="Leave Form" id="tab-0" />
           <Tab label="Leave History" id="tab-1" />
         </Tabs>
-
-        <TabPanel value={value} index={0}></TabPanel>
-
-        <TabPanel value={value} index={1}>
-          <DataGrid
-            rows={mockDataLeaveHistory}
-            columns={columns1}
-            PageSize={25}
-            rowsPerPageOption={[25]}
-            autoHeight
-            rowHeight={70}
-          />
-        </TabPanel>
       </Box>
+
+      <TabPanel value={value} index={0}>
+        <LeaveForm />
+      </TabPanel>
+
+      <TabPanel value={value} index={1}>
+        <DataGrid
+          rows={mockDataLeaveHistory}
+          columns={columns1}
+          PageSize={25}
+          rowsPerPageOption={[25]}
+          autoHeight
+          rowHeight={70}
+        />
+      </TabPanel>
     </Box>
   );
 }

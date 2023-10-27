@@ -3,6 +3,7 @@ import TabPanel from "../../components/TabPanel";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { useState } from "react";
 import { mockDataTeam } from "../../data/MockData2";
+import AddEmployee from "./AddEmployee";
 import React from "react";
 
 const columns = [
@@ -81,32 +82,36 @@ function Employee() {
         <Tabs value={value} onChange={handleChange}>
           <Tab label="Subordinate List" id="tab-0" />
           <Tab label="Leave Requests" id="tab-1" />
+          <Tab label="Add Employee" id="tab-2" />
         </Tabs>
-
-        <TabPanel value={value} index={0}>
-          <DataGrid
-            rows={mockDataTeam}
-            columns={columns}
-            PageSize={25}
-            rowsPerPageOption={[25]}
-            autoHeight
-            rowHeight={70}
-            components={{ Toolbar: GridToolbar }}
-          />
-        </TabPanel>
-
-        <TabPanel value={value} index={1}>
-          <DataGrid
-            rows={mockDataTeam}
-            columns={columns}
-            PageSize={25}
-            rowsPerPageOption={[25]}
-            autoHeight
-            rowHeight={70}
-            components={{ Toolbar: GridToolbar }}
-          />
-        </TabPanel>
       </Box>
+      <TabPanel value={value} index={0}>
+        <DataGrid
+          rows={mockDataTeam}
+          columns={columns}
+          PageSize={25}
+          rowsPerPageOption={[25]}
+          autoHeight
+          rowHeight={70}
+          components={{ Toolbar: GridToolbar }}
+        />
+      </TabPanel>
+
+      <TabPanel value={value} index={1}>
+        <DataGrid
+          rows={mockDataTeam}
+          columns={columns}
+          PageSize={25}
+          rowsPerPageOption={[25]}
+          autoHeight
+          rowHeight={70}
+          components={{ Toolbar: GridToolbar }}
+        />
+      </TabPanel>
+
+      <TabPanel value={value} index={2}>
+        <AddEmployee />
+      </TabPanel>
     </Box>
   );
 }
