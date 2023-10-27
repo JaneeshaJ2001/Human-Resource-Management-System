@@ -115,6 +115,39 @@ const columns2 = [
   },
 ];
 
+const columnsForDependents = [
+  {
+    field: "dependent_id",
+    headerName: "ID",
+    headerAlign: "left",
+    align: "left",
+    flex: 0.5,
+  },
+  {
+    field: "name",
+    headerName: "Name",
+    flex: 1,
+  },
+  {
+    field: "gender",
+    headerName: "Gender",
+    flex: 1,
+  },
+  {
+    field: "relationship",
+    headerName: "Relationship",
+  },
+  {
+    field: "b_date",
+    headerName: "DOB",
+  },
+  {
+    field: "address_id",
+    headerName: "Address",
+    flex: 2,
+  },
+];
+
 function Profile() {
   const [value, setValue] = useState(0);
 
@@ -126,7 +159,7 @@ function Profile() {
 
   const [employeeInfo, setEmployeeInfo] = useState([]);
   const [emergencyContacts, setEmergencyContacts] = useState([]);
-  const [dependent, setDependent] = useState([]);
+  const [dependents, setDependents] = useState([]);
 
   useEffect(() => {
     axios
@@ -164,7 +197,7 @@ function Profile() {
           console.log(response.error);
         } else {
           console.log(response.data); // logging
-          setDependent(response.data);
+          setDependents(response.data);
         }
       });
   }, []);
@@ -196,8 +229,9 @@ function Profile() {
 
         <TabPanel value={value} index={2}>
           <DataGrid
-            rows={mockDataDependent}
-            columns={columns2}
+            rows={dependents}
+            getRowId={(row) => row.dependent_id}
+            columns={columnsForDependents}
             PageSize={25}
             rowsPerPageOption={[25]}
             autoHeight

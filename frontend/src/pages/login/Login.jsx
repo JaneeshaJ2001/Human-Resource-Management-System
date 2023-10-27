@@ -15,10 +15,12 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -28,7 +30,12 @@ export default function SignIn() {
         password: data.get("password"),
       })
       .then((response) => {
-        console.log(response.data);
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          console.log(response.data);
+          navigate("/");
+        }
       });
   };
 
@@ -97,7 +104,7 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="forgot-password" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>

@@ -6,17 +6,77 @@ import { mockDataTeam } from "../../data/MockData2";
 import React from "react";
 import axios from "axios";
 
+// const columns = [
+//   {
+//     field: "id",
+//     headerName: "ID",
+//     type: "number",
+//     headerAlign: "left",
+//     align: "left",
+//     flex: 0.5,
+//   },
+//   {
+//     field: "name",
+//     headerName: "Name",
+//     flex: 1,
+//   },
+//   {
+//     field: "address",
+//     headerName: "Address",
+//     flex: 2,
+//   },
+//   {
+//     field: "maritalStatus",
+//     headerName: "Marital Status",
+//   },
+//   {
+//     field: "dob",
+//     headerName: "DOB",
+//     flex: 1,
+//   },
+//   {
+//     field: "gender",
+//     headerName: "Gender",
+//     flex: 1,
+//   },
+
+//   {
+//     field: "department",
+//     headerName: "Department",
+//     flex: 1,
+//   },
+//   {
+//     field: "designation",
+//     headerName: "Designation",
+//     flex: 1,
+//   },
+//   {
+//     field: "payGrade",
+//     headerName: "Pay Grade",
+//     type: "number",
+//     headerAlign: "left",
+//     align: "left",
+
+//     flex: 0.8,
+//   },
+//   {
+//     field: "status",
+//     headerName: "Status",
+//     flex: 1,
+//   },
+// ];
+
 const columns = [
   {
-    field: "id",
+    field: "emp_id",
     headerName: "ID",
-    type: "number",
+    // type: "number",
     headerAlign: "left",
     align: "left",
     flex: 0.5,
   },
   {
-    field: "name",
+    field: "first_name",
     headerName: "Name",
     flex: 1,
   },
@@ -26,41 +86,101 @@ const columns = [
     flex: 2,
   },
   {
-    field: "maritalStatus",
+    field: "marital_status",
     headerName: "Marital Status",
   },
   {
-    field: "dob",
+    field: "birth_date",
     headerName: "DOB",
     flex: 1,
   },
-  {
-    field: "gender",
-    headerName: "Gender",
-    flex: 1,
-  },
+  // {
+  //   field: "gender",
+  //   headerName: "Gender",
+  //   flex: 1,
+  // },
 
   {
-    field: "department",
+    field: "dept_name",
     headerName: "Department",
     flex: 1,
   },
   {
-    field: "designation",
+    field: "job_title",
     headerName: "Designation",
     flex: 1,
   },
+  // {
+  //   field: "payGrade",
+  //   headerName: "Pay Grade",
+  //   type: "number",
+  //   headerAlign: "left",
+  //   align: "left",
+
+  //   flex: 0.8,
+  // },
   {
-    field: "payGrade",
-    headerName: "Pay Grade",
-    type: "number",
+    field: "status_name",
+    headerName: "Status",
+    flex: 1,
+  },
+];
+
+const columnsLeaveApplications = [
+  {
+    field: "req_id",
+    headerName: "ID",
+    // type: "number",
     headerAlign: "left",
     align: "left",
-
-    flex: 0.8,
+    flex: 0.5,
   },
   {
-    field: "status",
+    field: "leave_type_id",
+    headerName: "Leave Type",
+    flex: 1,
+  },
+  {
+    field: "reason",
+    headerName: "Reason",
+    flex: 2,
+  },
+  {
+    field: "start_date",
+    headerName: "From",
+  },
+  {
+    field: "end_date",
+    headerName: "To",
+    flex: 1,
+  },
+  // {
+  //   field: "gender",
+  //   headerName: "Gender",
+  //   flex: 1,
+  // },
+
+  {
+    field: "created_at",
+    headerName: "Requested On",
+    flex: 1,
+  },
+  {
+    field: "supervisor_id",
+    headerName: "Supervisor",
+    flex: 1,
+  },
+  // {
+  //   field: "payGrade",
+  //   headerName: "Pay Grade",
+  //   type: "number",
+  //   headerAlign: "left",
+  //   align: "left",
+
+  //   flex: 0.8,
+  // },
+  {
+    field: "req_status",
     headerName: "Status",
     flex: 1,
   },
@@ -74,6 +194,7 @@ function Employee() {
   };
 
   const [employees, setEmployees] = useState([]);
+  const [leaveApplications, setLeaveApplications] = useState([]);
 
   useEffect(() => {
     axios
@@ -87,9 +208,21 @@ function Employee() {
           setEmployees(response.data);
         }
       });
+
+    axios
+      .get("http://localhost:1234/leaveApplication/bySupervisorId/e-001", {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        if (response.data.error) {
+          console.log(response.data.error);
+        } else {
+          setLeaveApplications(response.data);
+        }
+      });
   }, []);
 
-  // console.log(employees);
+  console.log(employees);
 
   return (
     <Box>
@@ -103,8 +236,18 @@ function Employee() {
         </Tabs>
 
         <TabPanel value={value} index={0}>
-          <DataGrid
+          {/* <DataGrid
             rows={mockDataTeam}
+            columns={columns}
+            PageSize={25}
+            rowsPerPageOption={[25]}
+            autoHeight
+            rowHeight={70}
+            components={{ Toolbar: GridToolbar }}
+          /> */}
+          <DataGrid
+            rows={employees}
+            getRowId={(row) => row.emp_id}
             columns={columns}
             PageSize={25}
             rowsPerPageOption={[25]}
@@ -116,8 +259,9 @@ function Employee() {
 
         <TabPanel value={value} index={1}>
           <DataGrid
-            rows={mockDataTeam}
-            columns={columns}
+            rows={leaveApplications}
+            getRowId={(row) => row.req_id}
+            columns={columnsLeaveApplications}
             PageSize={25}
             rowsPerPageOption={[25]}
             autoHeight

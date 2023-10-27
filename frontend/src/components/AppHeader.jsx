@@ -6,9 +6,11 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useProSidebar } from "react-pro-sidebar";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function AppHeader() {
   const { collapseSidebar, toggleSidebar, broken } = useProSidebar();
+  const navigate = useNavigate()
 
   return (
     <AppBar position="sticky" sx={styles.appBar}>
@@ -38,7 +40,7 @@ function AppHeader() {
           <SettingsIcon />
         </IconButton>
 
-        <IconButton title="Sign Out" color="secondary">
+        <IconButton title="Sign Out" color="secondary" onClick={()=>{navigate("/login")}}>
           <LogoutIcon />
         </IconButton>
       </Toolbar>

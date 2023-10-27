@@ -22,7 +22,7 @@ function AppRoutes() {
       <Route path="/addemp" element={<AddEmployee />} />
       <Route path="/department" element={<Department />}/> // checked
       <Route path="/document" element={<Document />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<Login />} /> // checked
       <Route path="/forgot-password" element={<ForgotPassword />} />
     </Routes>
   );
