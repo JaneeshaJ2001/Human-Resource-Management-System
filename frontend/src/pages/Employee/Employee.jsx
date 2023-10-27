@@ -85,7 +85,7 @@ function Employee() {
           <Tab label="Add Employee" id="tab-2" />
         </Tabs>
       </Box>
-      <TabPanel value={value} index={2}>
+      <TabPanel value={value} index={0}>
         <DataGrid
           rows={mockDataTeam}
           columns={columns}
@@ -109,7 +109,7 @@ function Employee() {
         />
       </TabPanel>
 
-      <TabPanel value={value} index={0}>
+      <TabPanel value={value} index={2}>
         <AddEmployee />
       </TabPanel>
     </Box>
