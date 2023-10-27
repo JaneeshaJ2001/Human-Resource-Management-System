@@ -1,9 +1,18 @@
-import { Box, Tab, Tabs, Typography } from "@mui/material";
-import TabPanel from "../../components/TabPanel";
+import {
+  Box,
+  Button,
+  Typography,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+} from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { useState } from "react";
 import { mockDataDepartment } from "../../data/MockData2";
+import AddDepartment from "./AddDepartment";
 import React from "react";
+import { useState } from "react";
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
 const columns = [
   {
@@ -60,36 +69,50 @@ const columns = [
 ];
 
 function Department() {
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const [openPopup, setOpenPopup] = useState(false);
 
   return (
     <Box>
       <Typography sx={styles.pageTitle} variant="h5">
         Department Section
       </Typography>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs value={value} onChange={handleChange}>
-          <Tab label="Current Departments" id="tab-0" />
-          <Tab label="Add Department" id="tab-1" />
-        </Tabs>
 
-        <TabPanel value={value} index={0}>
-          <DataGrid
-            rows={mockDataDepartment}
-            columns={columns}
-            PageSize={25}
-            rowsPerPageOption={[25]}
-            autoHeight
-            rowHeight={70}
-          />
-        </TabPanel>
+      <Button
+        variant="outlined"
+        startIcon={<AddOutlinedIcon />}
+        sx={{ mb: 4 }}
+        onClick={() => setOpenPopup(true)}
+      >
+        Add Department
+      </Button>
 
-        <TabPanel value={value} index={1}></TabPanel>
-      </Box>
+      <DataGrid
+        rows={mockDataDepartment}
+        columns={columns}
+        PageSize={25}
+        rowsPerPageOption={[25]}
+        autoHeight
+        rowHeight={70}
+      />
+      <Dialog open={openPopup} maxWidth="xl">
+        <DialogTitle>
+          <div style={{ display: "flex", alignContent: "space-between" }}>
+            <Typography variant="h6" component="div" style={{ flexGrow: 1 }}>
+              Add Department
+            </Typography>
+            <Button
+              onClick={() => {
+                setOpenPopup(false);
+              }}
+            >
+              <CloseOutlinedIcon />
+            </Button>
+          </div>
+        </DialogTitle>
+        <DialogContent dividers>
+          <AddDepartment />
+        </DialogContent>
+      </Dialog>
     </Box>
   );
 }
@@ -99,6 +122,6 @@ export default Department;
 /** @type {import("@mui/material").SxProps} */
 const styles = {
   pageTitle: {
-    mb: 2,
+    mb: 5,
   },
 };

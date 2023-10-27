@@ -15,11 +15,12 @@ export default function RadioButtonsGroup() {
       <Typography component={"h1"} variant="h5">
         Generate Report
       </Typography>
-
+      <br />
       <FormControl>
         <FormLabel id="demo-radio-buttons-group-label">
           Which report you want to generate
         </FormLabel>
+        <br />
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
           //defaultValue="0"

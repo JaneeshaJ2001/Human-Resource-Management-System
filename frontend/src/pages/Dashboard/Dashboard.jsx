@@ -1,4 +1,4 @@
-import { Box, Typography, Grid, Paper, Container } from "@mui/material";
+import { Box, Typography, Grid, Container } from "@mui/material";
 import React from "react";
 import Chart from "../../components/chart/Chart";
 import FeaturedInfo from "../../components/featuredInfo/FeaturedInfo";

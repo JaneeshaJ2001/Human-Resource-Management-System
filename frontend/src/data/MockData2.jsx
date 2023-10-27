@@ -125,42 +125,6 @@ export const mockDataTeam = [
   },
 ];
 
-export const mockDataContact = [
-  {
-    id: 1,
-    name: "Jon Snow",
-    relationship: "Son",
-    address: "No 11, Flower Road, Colombo",
-    mobilePhone: "0776212154",
-    homePhone: "0112869245",
-    edditedBy: "HR Manager",
-    date: "01/02/2023",
-    action: 1,
-  },
-  {
-    id: 2,
-    name: "Jon Snow",
-    relationship: "Son",
-    address: "No 11, Flower Road, Colombo",
-    mobilePhone: "0776212154",
-    homePhone: "0112869245",
-    edditedBy: "HR Manager",
-    date: "01/02/2023",
-    action: 1,
-  },
-  {
-    id: 3,
-    name: "Jon Snow",
-    relationship: "Son",
-    address: "No 11, Flower Road, Colombo",
-    mobilePhone: "0776212154",
-    homePhone: "0112869245",
-    edditedBy: "HR Manager",
-    date: "01/02/2023",
-    action: 1,
-  },
-];
-
 export const mockDataDependent = [
   {
     id: 1,

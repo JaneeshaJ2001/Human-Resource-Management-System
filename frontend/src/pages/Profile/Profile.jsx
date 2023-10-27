@@ -2,7 +2,7 @@ import { Box, Tab, Tabs, Typography } from "@mui/material";
 import TabPanel from "../../components/TabPanel";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
-import { mockDataContact, mockDataDependent } from "../../data/MockData2";
+import { mockDataDependent } from "../../data/MockData2";
 import React from "react";
 
 const columns1 = [
@@ -128,24 +128,13 @@ function Profile() {
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs value={value} onChange={handleChange}>
           <Tab label="Employee Summary" id="tab-0" />
-          <Tab label="Emergency Contacts" id="tab-1" />
-          <Tab label="Dependent details" id="tab-2" />
+
+          <Tab label="Dependent details" id="tab-1" />
         </Tabs>
 
         <TabPanel value={value} index={0}></TabPanel>
 
         <TabPanel value={value} index={1}>
-          <DataGrid
-            rows={mockDataContact}
-            columns={columns1}
-            PageSize={25}
-            rowsPerPageOption={[25]}
-            autoHeight
-            rowHeight={70}
-          />
-        </TabPanel>
-
-        <TabPanel value={value} index={2}>
           <DataGrid
             rows={mockDataDependent}
             columns={columns2}

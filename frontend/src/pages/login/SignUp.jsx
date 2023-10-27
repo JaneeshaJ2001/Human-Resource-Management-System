@@ -1,20 +1,20 @@
-import * as React from "react";
 import {
   Avatar,
   Button,
-  CssBaseline,
   TextField,
   Grid,
   Box,
   Typography,
-  Container,
+  CssBaseline,
+  FormControl,
   InputLabel,
   MenuItem,
   Select,
-  FormControl,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+import React from "react";
 
 const defaultTheme = createTheme();
 
@@ -23,9 +23,11 @@ export default function SignUp() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
+      username: data.get("username"),
       password: data.get("password"),
     });
   };
+
   const [role, setRole] = React.useState("");
 
   const handleChange = (event) => {
@@ -34,81 +36,89 @@ export default function SignUp() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          backgroundImage: `url("https://png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-modern-double-color-futuristic-neon-background-image_351866.jpg")`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          position: "absolute",
+          backgroundPosition: "center",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
+        <Grid
+          //item
+          bgcolor="background.paper"
+          container
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+          sx={{ p: 5, m: 70 }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Welcome to Jupyter
           </Typography>
           <Box
             component="form"
-            noValidate
             onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
+            noValidate
+            sx={{ mt: 2 }}
           >
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <TextField
-                  autoComplete="id"
-                  name="id"
-                  required
-                  fullWidth
-                  id="id"
-                  label="User ID"
-                  autoFocus
-                />
-              </Grid>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="id"
+              label="User ID"
+              name="id"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+            />
 
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Role</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={role}
-                    label="Role"
-                    onChange={handleChange}
-                  >
-                    <MenuItem value={1}>HR Manager</MenuItem>
-                    <MenuItem value={2}>Supervisor</MenuItem>
-                    <MenuItem value={3}>Employee</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
+            <Grid>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={role}
+                  label="Role"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={1}>HR Manager</MenuItem>
+                  <MenuItem value={2}>Supervisor</MenuItem>
+                  <MenuItem value={3}>Employee</MenuItem>
+                </Select>
+              </FormControl>
             </Grid>
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 6, mb: 2 }}
+              sx={{ mt: 4, mb: 1 }}
             >
               Sign Up
             </Button>
           </Box>
-        </Box>
-      </Container>
+        </Grid>
+      </div>
     </ThemeProvider>
   );
 }

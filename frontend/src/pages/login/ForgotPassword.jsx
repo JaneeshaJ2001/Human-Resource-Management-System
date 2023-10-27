@@ -1,14 +1,15 @@
 import {
   Avatar,
   Button,
-  CssBaseline,
   TextField,
+  Grid,
   Box,
   Typography,
-  Container,
+  CssBaseline,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 import React from "react";
 
 const defaultTheme = createTheme();
@@ -19,20 +20,35 @@ export default function SignIn() {
     const data = new FormData(event.currentTarget);
     console.log({
       username: data.get("username"),
+      password: data.get("password"),
     });
   };
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          backgroundImage: `url("https://png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-modern-double-color-futuristic-neon-background-image_351866.jpg")`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          position: "absolute",
+          backgroundPosition: "center",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
+        <Grid
+          //item
+          bgcolor="background.paper"
+          container
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+          sx={{ p: 5, m: 70 }}
         >
           <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
             <LockOutlinedIcon />
@@ -44,7 +60,7 @@ export default function SignIn() {
             component="form"
             onSubmit={handleSubmit}
             noValidate
-            sx={{ mt: 1 }}
+            sx={{ mt: 3 }}
           >
             <TextField
               margin="normal"
@@ -81,13 +97,13 @@ export default function SignIn() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 7, mb: 2 }}
+              sx={{ mt: 3, mb: 1 }}
             >
               Submit
             </Button>
           </Box>
-        </Box>
-      </Container>
+        </Grid>
+      </div>
     </ThemeProvider>
   );
 }
