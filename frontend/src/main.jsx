@@ -6,6 +6,7 @@ import ForgotPassword from "./pages/login/ForgotPassword.jsx";
 import SignUp from "./pages/login/SignUp.jsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
+import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

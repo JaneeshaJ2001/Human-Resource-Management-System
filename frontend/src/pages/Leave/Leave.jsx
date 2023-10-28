@@ -1,4 +1,4 @@
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Tab, Tabs, Typography, Paper } from "@mui/material";
 import TabPanel from "../../components/TabPanel";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
@@ -84,14 +84,16 @@ function Leave() {
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-        <DataGrid
-          rows={mockDataLeaveHistory}
-          columns={columns1}
-          PageSize={25}
-          rowsPerPageOption={[25]}
-          autoHeight
-          rowHeight={70}
-        />
+        <Paper>
+          <DataGrid
+            rows={mockDataLeaveHistory}
+            columns={columns1}
+            PageSize={25}
+            rowsPerPageOption={[25]}
+            autoHeight
+            rowHeight={70}
+          />
+        </Paper>
       </TabPanel>
     </Box>
   );

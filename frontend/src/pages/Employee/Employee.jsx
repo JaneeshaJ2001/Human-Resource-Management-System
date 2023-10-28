@@ -1,4 +1,4 @@
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Tab, Tabs, Typography, Paper } from "@mui/material";
 import TabPanel from "../../components/TabPanel";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { useState } from "react";
@@ -86,27 +86,31 @@ function Employee() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <DataGrid
-          rows={mockDataTeam}
-          columns={columns}
-          PageSize={25}
-          rowsPerPageOption={[25]}
-          autoHeight
-          rowHeight={70}
-          components={{ Toolbar: GridToolbar }}
-        />
+        <Paper>
+          <DataGrid
+            rows={mockDataTeam}
+            columns={columns}
+            PageSize={25}
+            rowsPerPageOption={[25]}
+            autoHeight
+            rowHeight={70}
+            components={{ Toolbar: GridToolbar }}
+          />
+        </Paper>
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-        <DataGrid
-          rows={mockDataTeam}
-          columns={columns}
-          PageSize={25}
-          rowsPerPageOption={[25]}
-          autoHeight
-          rowHeight={70}
-          components={{ Toolbar: GridToolbar }}
-        />
+        <Paper>
+          <DataGrid
+            rows={mockDataTeam}
+            columns={columns}
+            PageSize={25}
+            rowsPerPageOption={[25]}
+            autoHeight
+            rowHeight={70}
+            components={{ Toolbar: GridToolbar }}
+          />
+        </Paper>
       </TabPanel>
 
       <TabPanel value={value} index={2}>
