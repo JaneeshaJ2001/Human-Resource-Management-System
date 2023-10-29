@@ -3,6 +3,7 @@ import TabPanel from "../../components/TabPanel";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
 import { mockDataDependent } from "../../data/MockData2";
+import EmployeeSummary from "./EmployeeSummary";
 import React from "react";
 
 const columns1 = [
@@ -131,20 +132,21 @@ function Profile() {
 
           <Tab label="Dependent details" id="tab-1" />
         </Tabs>
-
-        <TabPanel value={value} index={0}></TabPanel>
-
-        <TabPanel value={value} index={1}>
-          <DataGrid
-            rows={mockDataDependent}
-            columns={columns2}
-            PageSize={25}
-            rowsPerPageOption={[25]}
-            autoHeight
-            rowHeight={70}
-          />
-        </TabPanel>
       </Box>
+      <TabPanel value={value} index={0}>
+        <EmployeeSummary />
+      </TabPanel>
+
+      <TabPanel value={value} index={1}>
+        <DataGrid
+          rows={mockDataDependent}
+          columns={columns2}
+          PageSize={25}
+          rowsPerPageOption={[25]}
+          autoHeight
+          rowHeight={70}
+        />
+      </TabPanel>
     </Box>
   );
 }

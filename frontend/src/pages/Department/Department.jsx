@@ -1,11 +1,11 @@
 import {
   Box,
   Button,
-  Fab,
   Typography,
   Dialog,
   DialogTitle,
   DialogContent,
+  Paper,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { mockDataDepartment } from "../../data/MockData2";
@@ -98,15 +98,16 @@ function Department() {
       >
         Add Department
       </Button>
-
-      <DataGrid
-        rows={mockDataDepartment}
-        columns={columns}
-        PageSize={25}
-        rowsPerPageOption={[25]}
-        autoHeight
-        rowHeight={70}
-      />
+      <Paper>
+        <DataGrid
+          rows={mockDataDepartment}
+          columns={columns}
+          PageSize={25}
+          rowsPerPageOption={[25]}
+          autoHeight
+          rowHeight={70}
+        />
+      </Paper>
       <Dialog open={openPopup} maxWidth="xl">
         <DialogTitle>
           <div style={{ display: "flex", alignContent: "space-between" }}>
