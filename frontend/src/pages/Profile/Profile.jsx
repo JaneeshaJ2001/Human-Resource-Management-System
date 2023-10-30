@@ -1,9 +1,22 @@
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import {
+  Box,
+  Paper,
+  Tab,
+  Tabs,
+  Typography,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+} from "@mui/material";
 import TabPanel from "../../components/TabPanel";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
 import { mockDataDependent } from "../../data/MockData2";
 import EmployeeSummary from "./EmployeeSummary";
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import AddDependent from "./AddDependent";
 import React from "react";
 
 const columns1 = [
@@ -115,6 +128,8 @@ const columns2 = [
 ];
 
 function Profile() {
+  const [openPopup, setOpenPopup] = useState(false);
+
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -138,15 +153,44 @@ function Profile() {
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-        <DataGrid
-          rows={mockDataDependent}
-          columns={columns2}
-          PageSize={25}
-          rowsPerPageOption={[25]}
-          autoHeight
-          rowHeight={70}
-        />
+        <Button
+          variant="outlined"
+          startIcon={<AddOutlinedIcon />}
+          sx={{ mb: 4 }}
+          onClick={() => setOpenPopup(true)}
+        >
+          Add Dependent
+        </Button>
+        <Paper>
+          <DataGrid
+            rows={mockDataDependent}
+            columns={columns2}
+            PageSize={25}
+            rowsPerPageOption={[25]}
+            autoHeight
+            rowHeight={70}
+          />
+        </Paper>
       </TabPanel>
+      <Dialog open={openPopup} maxWidth="xl">
+        <DialogTitle>
+          <div style={{ display: "flex", alignContent: "space-between" }}>
+            <Typography variant="h6" component="div" style={{ flexGrow: 1 }}>
+              Add Dependent
+            </Typography>
+            <Button
+              onClick={() => {
+                setOpenPopup(false);
+              }}
+            >
+              <CloseOutlinedIcon />
+            </Button>
+          </div>
+        </DialogTitle>
+        <DialogContent dividers>
+          <AddDependent />
+        </DialogContent>
+      </Dialog>
     </Box>
   );
 }

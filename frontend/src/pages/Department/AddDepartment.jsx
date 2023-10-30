@@ -1,4 +1,5 @@
 import React from "react";
+import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 import {
   Grid,
   TextField,
@@ -7,6 +8,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Button,
 } from "@mui/material";
 
 export default function AddDepartment() {
@@ -21,7 +23,7 @@ export default function AddDepartment() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Box sx={{ p: 3 }}>
+      <Box sx={{ p: 2.5 }} flexDirection={"column"}>
         <Grid>
           <TextField
             variant="outlined"
@@ -44,21 +46,30 @@ export default function AddDepartment() {
             name="noOfEmployees"
           />
         </Grid>
-
-        <FormControl sx={{ minWidth: 210 }}>
-          <InputLabel id="demo-simple-select-label">Department Name</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={name}
-            label="Department Name"
-            onChange={handleChange}
-          >
-            <MenuItem value={1}>HR</MenuItem>
-            <MenuItem value={2}>IT</MenuItem>
-            <MenuItem value={3}>Financial</MenuItem>
-          </Select>
-        </FormControl>
+        <Grid>
+          <FormControl sx={{ minWidth: 210 }}>
+            <InputLabel id="demo-simple-select-label">
+              Department Name
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={name}
+              label="Department Name"
+              onChange={handleChange}
+            >
+              <MenuItem value={1}>HR</MenuItem>
+              <MenuItem value={2}>IT</MenuItem>
+              <MenuItem value={3}>Financial</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <br />
+        <Grid>
+          <Button variant="contained" endIcon={<SendOutlinedIcon />}>
+            Submit
+          </Button>
+        </Grid>
       </Box>
     </form>
   );
