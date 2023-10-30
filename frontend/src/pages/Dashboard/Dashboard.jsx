@@ -39,12 +39,10 @@ function Dashboard() {
 
       <Container maxWidth="lg" sx={{ mt: 3 }}>
         <Grid container spacing={0.5}>
-          {/* Recent Orders */}
           <Grid item xs={12}>
             <FeaturedInfo />
           </Grid>
 
-          {/* Chart */}
           <Grid item xs={12}>
             <Chart
               data={userData}
