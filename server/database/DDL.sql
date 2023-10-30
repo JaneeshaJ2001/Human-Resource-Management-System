@@ -184,7 +184,7 @@ CREATE TABLE Emergency_details (
 CREATE TABLE Account (
     username varchar(50),
     password varchar(255) NOT NULL,
-    emp_id varchar(10),
+    emp_id varchar(10) UNIQUE,
     role_id varchar(20),
     -- admin
     updated_at timestamp,
@@ -1585,10 +1585,11 @@ left join role on employee.job_id=role.job_id
 left join department on employee.dept_id=department.dept_id
 left join emp_status on employee.emp_status_id=emp_status.emp_status_id;
 
+
+drop view if exists employee_info_view;
 create view employee_info_view as
 select employee.emp_id,employee.first_name,employee.last_name,employee.birth_date,employee.SupervisorId,employee.marital_status,
-concat(address.PB_number,',',address.street_name,',',address.city_name,',',address.country) as address,
-branches.branch_name,role.job_title,department.dept_name,emp_status.status_name
+address.PB_number,address.street_name,address.city_name,address.country,branches.branch_name,role.job_title,role.pay_grade,department.dept_name,emp_status.status_name,employee.created_at,employee.updated_at
 from employee
 left join address on employee.address_id=address.address_id
 left join branches on employee.branch_id=branches.branch_id
@@ -1597,4 +1598,25 @@ left join department on employee.dept_id=department.dept_id
 left join emp_status on employee.emp_status_id=emp_status.emp_status_id;
 
 
+drop view if exists department_view;
+create view department_view as
+select department.dept_id, department.dept_name, (count(emp_id)) as current_no_of_employees, 
+department.no_of_employees as max_no_of_employees, 
+department.updated_at, 
+department.created_at
+from department 
+left join employee on department.dept_id= employee.dept_id
+group by dept_name,dept_id;
+
+
+drop view if exists leave_application_view;
+create view leave_application_view as
+select 
+leave_application.req_id, leave_type_names.leave_type_name, 
+leave_application.reason, leave_application.start_date, leave_application.end_date, 
+leave_application.supervisor_id, leave_application.req_status, leave_application.emp_id,
+employee.first_name, employee.last_name, 
+leave_application.created_at, leave_application.updated_at 
+from (leave_application left join leave_type_names 
+on (leave_application.leave_type_id = leave_type_names.leave_type_id)) left join employee on (employee.emp_id = leave_application.emp_id) ;
 

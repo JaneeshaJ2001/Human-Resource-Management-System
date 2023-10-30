@@ -13,8 +13,8 @@ router.post("/", validateToken, (req, res) => {
     street_name,
     city_name,
     country,
-    mobile_phone,
-    home_phone,
+    Mobile_phone,
+    Home_phone,
   } = req.body;
   const query = "call add_emergency_contact(?,?,?,?,?,?,?,?,?)";
   db.query(
@@ -27,8 +27,8 @@ router.post("/", validateToken, (req, res) => {
       street_name,
       city_name,
       country,
-      mobile_phone,
-      home_phone,
+      Mobile_phone,
+      Home_phone,
     ],
     (err, data) => {
       if (err) {
@@ -41,7 +41,7 @@ router.post("/", validateToken, (req, res) => {
 });
 
 router.get("/", validateToken, (req, res) => {
-  const query = "select * from emergency_details";
+  const query = "select emergency_details.emp_id, emergency_details.contact_name, emergency_details.relationship, emergency_details.Mobile_phone, emergency_details.Home_phone, address.PB_number, address.street_name, address.city_name, address.country, emergency_details.created_at, emergency_details.updated_at from emergency_details left join address on (emergency_details.address_id = address.address_id)";
   db.query(query, (err, data) => {
     if (err) {
       res.json({ error: err });
@@ -52,7 +52,7 @@ router.get("/", validateToken, (req, res) => {
 });
 
 router.get("/byId/:emp_id", validateToken, (req, res) => {
-  const query = "select * from emergency_details where emp_id = ?";
+  const query = "select emergency_details.emp_id, emergency_details.contact_name, emergency_details.relationship, emergency_details.Mobile_phone, emergency_details.Home_phone, address.PB_number, address.street_name, address.city_name, address.country, emergency_details.created_at, emergency_details.updated_at from emergency_details left join address on (emergency_details.address_id = address.address_id) where emergency_details.emp_id = ?";
   db.query(query, [req.params.emp_id], (err, data) => {
     if (err) {
       res.json({ error: err });
@@ -81,8 +81,8 @@ router.put("/", validateToken, (req, res) => {
     street_name,
     city_name,
     country,
-    mobile_phone,
-    home_phone,
+    Mobile_phone,
+    Home_phone,
   } = req.body;
   const query = "call update_emergency_contact(?,?,?,?,?,?,?,?,?)";
   db.query(
@@ -95,8 +95,8 @@ router.put("/", validateToken, (req, res) => {
       street_name,
       city_name,
       country,
-      mobile_phone,
-      home_phone,
+      Mobile_phone,
+      Home_phone,
     ],
     (err, data) => {
       if (err) {

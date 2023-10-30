@@ -8,6 +8,11 @@ VALUES
 INSERT INTO
     user_role (role_name)
 VALUES
+    ('Admin');
+
+INSERT INTO
+    user_role (role_name)
+VALUES
     ('HRmanager');
 
 INSERT INTO

@@ -10,8 +10,7 @@ const { validateToken } = require("../middlewares/AuthMiddleware");
 router.post("/register", (req, res) => {
   const { username, password, emp_id, role_id } = req.body;
   const query =
-    "insert into account (username,password,emp_id,role_id) values (?,?,?,?)";
-
+    "insert into account (username,password,emp_id,role_id) values (?,?,?,?); select account.username from account order by account.username desc limit 1;";
   bcrypt.hash(password, 10).then((hashedPassword) => {
     db.query(
       query,
@@ -20,10 +19,21 @@ router.post("/register", (req, res) => {
         if (err) {
           res.json({ error: err });
         } else {
-          res.json({ success: "user added successfully" });
+          res.json(data[1][0]);
         }
       }
     );
+  });
+});
+router.get("/register", (req, res) => {
+  const query =
+    "select account.username from account order by account.username desc limit 1";
+  db.query(query, (err, data) => {
+    if (err) {
+      res.json({ error: err });
+    } else {
+      res.json(data);
+    }
   });
 });
 

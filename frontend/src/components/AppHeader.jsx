@@ -5,10 +5,37 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useProSidebar } from "react-pro-sidebar";
-import React from "react";
+import React, { useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../helpers/AuthContext";
 
 function AppHeader() {
   const { collapseSidebar, toggleSidebar, broken } = useProSidebar();
+
+  const location = useLocation();
+
+  const { setAuthState } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  if (
+    location.pathname === "/login" ||
+    location.pathname === "/signup" ||
+    location.pathname === "/forgotpassword"
+  ) {
+    return null;
+  }
+
+  const LogOut = () => {
+    setAuthState({
+      username: "",
+      emp_id: "",
+      role_id: "",
+      status: false,
+    });
+    localStorage.removeItem("accessToken");
+    navigate("/login");
+  };
 
   return (
     <AppBar position="sticky" sx={styles.appBar}>
@@ -38,7 +65,7 @@ function AppHeader() {
           <SettingsIcon />
         </IconButton>
 
-        <IconButton title="Sign Out" color="secondary">
+        <IconButton title="Sign Out" color="secondary" onClick={LogOut}>
           <LogoutIcon />
         </IconButton>
       </Toolbar>
