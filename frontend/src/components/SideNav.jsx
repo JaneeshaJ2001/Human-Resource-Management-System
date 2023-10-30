@@ -10,7 +10,9 @@ import {
 } from "@mui/icons-material";
 import { useTheme } from "@emotion/react";
 import { Link, useLocation } from "react-router-dom";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../helpers/AuthContext";
+import axios from "axios";
 
 function SideNav() {
   const { collapsed } = useProSidebar();
@@ -18,6 +20,20 @@ function SideNav() {
   const theme = useTheme();
 
   const location = useLocation();
+
+  const { authState } = useContext(AuthContext);
+  const [employeeDetails, setEmployeeDetails] = useState({});
+
+  if (
+    location.pathname === "/login" ||
+    location.pathname === "/signup" ||
+    location.pathname === "/forgotpassword" 
+  ) {
+    return null;
+  }
+
+  // console.log(authState);
+  // console.log("from sidenav")
 
   return (
     <Sidebar
@@ -32,17 +48,20 @@ function SideNav() {
         <Avatar
           sx={styles.avatar}
           alt="Profile name"
-          src="src/assets/user.png"
+          src="/src/assets/user.png"
+          // src="../src/assets/user.png"
+
         />
         {!collapsed ? (
           <Typography variant="body2" sx={styles.profileName}>
-            Smith Jones
+            {authState.personal_details &&
+              `${authState.personal_details.first_name} ${authState.personal_details.last_name}`}
           </Typography>
         ) : null}
         {!collapsed ? (
           <Typography variant="body2" fontWeight={"bold"}>
             {" "}
-            Admin
+            {authState.personal_details && authState.personal_details.job_title}
           </Typography>
         ) : null}
       </Box>
@@ -80,37 +99,48 @@ function SideNav() {
           <Typography variant="body2"> Profile </Typography>
         </MenuItem>
 
-        <MenuItem
-          active={location.pathname === "/leave"}
-          component={<Link to="/leave" />}
-          icon={<ExitToAppOutlined />}
-        >
-          <Typography variant="body2"> Leave Section </Typography>
-        </MenuItem>
+        {authState.role_id === "r-004" && (
+          <MenuItem
+            active={location.pathname === "/leave"}
+            component={<Link to="/leave" />}
+            icon={<ExitToAppOutlined />}
+          >
+            <Typography variant="body2"> Leave Section </Typography>
+          </MenuItem>
+        )}
 
-        <MenuItem
-          active={location.pathname === "/Employee"}
-          component={<Link to="/Employee" />}
-          icon={<PeopleOutlineOutlined />}
-        >
-          <Typography variant="body2"> Employees </Typography>
-        </MenuItem>
+        {(authState.role_id === "r-002" || authState.role_id === "r-003") && (
+          <MenuItem
+            active={location.pathname === "/employee"}
+            component={<Link to="/employee" />}
+            icon={<PeopleOutlineOutlined />}
+          >
+            <Typography variant="body2">
+              {" "}
+              {authState.role_id === "r-002"
+                ? "Employees"
+                : "Subordinates"}{" "}
+            </Typography>
+          </MenuItem>
+        )}
 
-        <MenuItem
-          active={location.pathname === "/department"}
-          component={<Link to="/department" />}
-          icon={<BusinessOutlined />}
-        >
-          <Typography variant="body2"> Department </Typography>
-        </MenuItem>
+        {authState.role_id === "r-002" && (
+          <MenuItem
+            active={location.pathname === "/department"}
+            component={<Link to="/department" />}
+            icon={<BusinessOutlined />}
+          >
+            <Typography variant="body2"> Department </Typography>
+          </MenuItem>
+        )}
 
-        <MenuItem
+        {/* <MenuItem
           active={location.pathname === "/document"}
           component={<Link to="/document" />}
           icon={<DescriptionOutlined />}
         >
           <Typography variant="body2"> Documents </Typography>
-        </MenuItem>
+        </MenuItem> */}
       </Menu>
     </Sidebar>
   );

@@ -7,12 +7,12 @@ const { validateToken } = require("../middlewares/AuthMiddleware");
 
 router.post("/", validateToken, (req, res) => {
   const emp_id = req.user.emp_id;
-  const { contact_number } = req.body;
+  const {contact_number} = req.body;
 
   const query = "insert into contact (emp_id, contact_number) values (?,?)";
   db.query(query, [emp_id, contact_number], (err, data) => {
     if (err) {
-      res.json(err);
+      res.json({error: err});
     } else {
       res.json({ success: "contact added successfully" });
     }
@@ -31,7 +31,7 @@ router.get("/", validateToken, (req, res) => {
 });
 
 router.get("/byEmpId/:emp_id", validateToken, (req, res) => {
-  const query = "select * from contact where emp_id = ?";
+  const query = "select * from contact where emp_id = ? order by created_at" ;
   db.query(query, [req.params.emp_id], (err, data) => {
     if (err) {
       res.json({ error: err });

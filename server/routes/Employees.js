@@ -22,6 +22,7 @@ router.post("/", (req, res) => {
     SupervisorId,
     marital_status,
   } = req.body;
+
   const query =
     "call add_employee(?,?,?,?,?,?,?,?,?,?,?,?,?,?,@emp_id); select @emp_id as emp_id;";
   db.query(
@@ -44,7 +45,7 @@ router.post("/", (req, res) => {
     ],
     (err, data) => {
       if (err) {
-        res.json(err);
+        res.json({ error: err });
       } else {
         res.json(data[1][0]);
       }
@@ -84,6 +85,29 @@ router.get("/bySupervisorId/:supervisor_id", validateToken, (req, res) => {
     }
   });
 });
+
+router.get("/superVisors", validateToken, (req, res) => {
+  const query =
+    "select emp_id from employee_info_view where SupervisorId is null";
+  db.query(query, (err, data) => {
+    if (err) {
+      res.json({ error: err });
+    } else {
+      res.json(data);
+    }
+  });
+});
+
+// router.get("/subOrdinates", validateToken, (req, res) => {
+//   const query = "select emp_id from employee where SupervisorId = ?";
+//   dn.query(query, [req.user.emp_id], (err, data) => {
+//     if (err) {
+//       res.json({ error: err });
+//     } else {
+//       res.json(data);
+//     }
+//   });
+// });
 
 router.put("/", validateToken, (req, res) => {
   const {

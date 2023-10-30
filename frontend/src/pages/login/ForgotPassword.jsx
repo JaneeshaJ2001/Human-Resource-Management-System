@@ -6,6 +6,7 @@ import {
   Box,
   Typography,
   CssBaseline,
+  Link,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -101,6 +102,14 @@ export default function SignIn() {
             >
               Submit
             </Button>
+
+            <Grid container>
+              <Grid item xs>
+                <Link href="/login" variant="body2">
+                  Login instead !
+                </Link>
+              </Grid>
+            </Grid>
           </Box>
         </Grid>
       </div>

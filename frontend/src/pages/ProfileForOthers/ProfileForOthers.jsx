@@ -17,123 +17,14 @@ import {
 import TabPanel from "../../components/TabPanel";
 import { DataGrid } from "@mui/x-data-grid";
 import { useContext, useEffect, useState } from "react";
-import { mockDataDependent } from "../../data/MockData2";
 import React from "react";
 import { AuthContext } from "../../helpers/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import EmployeeSummary from "./EmployeeSummary";
 import moment from "moment";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-
-const columns1 = [
-  {
-    field: "id",
-    headerName: "ID",
-    type: "number",
-    headerAlign: "left",
-    align: "left",
-    flex: 0.5,
-  },
-  {
-    field: "name",
-    headerName: "Name",
-    flex: 1,
-  },
-  {
-    field: "relationship",
-    headerName: "Relationship",
-  },
-  {
-    field: "address",
-    headerName: "Address",
-    flex: 2,
-  },
-
-  {
-    field: "mobilePhone",
-    headerName: "Mobile Phone",
-    flex: 1,
-  },
-  {
-    field: "homePhone",
-    headerName: "Home Phone",
-    flex: 1,
-  },
-
-  {
-    field: "edditedBy",
-    headerName: "Edited By",
-    flex: 1,
-  },
-  {
-    field: "date",
-    headerName: "Date",
-    flex: 1,
-  },
-
-  {
-    field: "action",
-    headerName: "Action",
-
-    flex: 1,
-  },
-];
-
-const columns2 = [
-  {
-    field: "id",
-    headerName: "ID",
-    type: "number",
-    headerAlign: "left",
-    align: "left",
-    flex: 0.5,
-  },
-  {
-    field: "name",
-    headerName: "Name",
-    flex: 1,
-  },
-  {
-    field: "relationship",
-    headerName: "Relationship",
-  },
-  {
-    field: "address",
-    headerName: "Address",
-    flex: 2,
-  },
-
-  {
-    field: "mobilePhone",
-    headerName: "Mobile Phone",
-    flex: 1,
-  },
-  {
-    field: "homePhone",
-    headerName: "Home Phone",
-    flex: 1,
-  },
-
-  {
-    field: "edditedBy",
-    headerName: "Edited By",
-    flex: 1,
-  },
-  {
-    field: "date",
-    headerName: "Date",
-    flex: 1,
-  },
-
-  {
-    field: "action",
-    headerName: "Action",
-
-    flex: 1,
-  },
-];
 
 const columnsForDependents = [
   {
@@ -189,7 +80,7 @@ const columnsForContacts = [
   },
 ];
 
-function Profile() {
+function ProfileForOthers() {
   const [value, setValue] = useState(0);
 
   const [openPopupAddContact, setOpenPopupAddContact] = useState(false);
@@ -264,12 +155,82 @@ function Profile() {
   const [dependents, setDependents] = useState([]);
   const [contacts, setContacts] = useState([]);
 
+  const { emp_id } = useParams();
+
   useEffect(() => {
     if (!authState.status) {
       navigate("/login");
     } else {
       axios
-        .get(`http://localhost:1234/dependent/byId/${authState.emp_id}`, {
+        .get("http://localhost:1234/employee", {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        })
+        .then((response) => {
+          if (response.data.error) {
+            console.log(response.data.error);
+            navigate("/profile");
+          } else {
+            const allEmps = response.data.map((emp) => emp.emp_id);
+            if (!allEmps.includes(emp_id)) {
+              navigate("/profile");
+            }
+          }
+        });
+    }
+
+    if (authState.role_id === "r-004" || authState.emp_id === emp_id) {
+      navigate("/profile");
+    } else if (authState.role_id === "r-003") {
+      axios
+        .get(
+          `http://localhost:1234/employee/bySupervisorId/${authState.emp_id}`,
+          {
+            headers: { accessToken: localStorage.getItem("accessToken") },
+          }
+        )
+        .then((response) => {
+          if (response.data.error) {
+            console.log(response.data.error);
+          } else {
+            // console.log(response.data);
+            const subs = response.data.map((sub) => sub.emp_id);
+            if (subs && subs.includes(emp_id)) {
+              axios
+                .get(`http://localhost:1234/dependent/byId/${emp_id}`, {
+                  headers: { accessToken: localStorage.getItem("accessToken") },
+                })
+                .then((response) => {
+                  if (response.data.error) {
+                    console.log(response.data.error);
+                  } else {
+                    // console.log(response.data);
+                    setDependents(response.data);
+                  }
+                });
+              axios
+                .get(`http://localhost:1234/contact/byEmpId/${emp_id}`, {
+                  headers: { accessToken: localStorage.getItem("accessToken") },
+                })
+                .then((response) => {
+                  if (response.data.error) {
+                    console.log(response.data.error);
+                    navigate("/profile");
+                  } else {
+                    // console.log(response.data);
+                    setContacts(response.data);
+                  }
+                });
+              allContactOnly = contacts.map(
+                (contact) => contact.contact_number
+              );
+            } else {
+              navigate("/profile");
+            }
+          }
+        });
+    } else {
+      axios
+        .get(`http://localhost:1234/dependent/byId/${emp_id}`, {
           headers: { accessToken: localStorage.getItem("accessToken") },
         })
         .then((response) => {
@@ -281,7 +242,7 @@ function Profile() {
           }
         });
       axios
-        .get(`http://localhost:1234/contact/byEmpId/${authState.emp_id}`, {
+        .get(`http://localhost:1234/contact/byEmpId/${emp_id}`, {
           headers: { accessToken: localStorage.getItem("accessToken") },
         })
         .then((response) => {
@@ -301,7 +262,7 @@ function Profile() {
   return (
     <Box>
       <Typography sx={styles.pageTitle} variant="h5">
-        Employee Section
+        {`Employee Section of ${emp_id}`}
       </Typography>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs value={value} onChange={handleChange}>
@@ -315,14 +276,14 @@ function Profile() {
         </TabPanel>
 
         <TabPanel value={value} index={1}>
-          <Button
+          {/* <Button
             variant="outlined"
             startIcon={<AddOutlinedIcon />}
             sx={{ mb: 4 }}
             onClick={() => setOpenPopupAddContact(true)}
           >
             Add Contact
-          </Button>
+          </Button> */}
           <DataGrid
             rows={contacts}
             getRowId={(row) => row.contact_number}
@@ -385,14 +346,14 @@ function Profile() {
         </TabPanel>
 
         <TabPanel value={value} index={2}>
-          <Button
+          {/* <Button
             variant="outlined"
             startIcon={<AddOutlinedIcon />}
             sx={{ mb: 4 }}
             onClick={() => setOpenPopupAddDependent(true)}
           >
             Add Dependent
-          </Button>
+          </Button> */}
           <DataGrid
             rows={dependents}
             getRowId={(row) => row.dependent_id}
@@ -558,7 +519,7 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default ProfileForOthers;
 
 /** @type {import("@mui/material").SxProps} */
 const styles = {

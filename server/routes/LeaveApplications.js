@@ -22,7 +22,7 @@ router.post("/", validateToken, (req, res) => {
 });
 
 router.get("/byId/:emp_id", validateToken, (req, res) => {
-  const query = "select * from leave_application where emp_id = ?";
+  const query = "select * from leave_application_view where emp_id = ?";
   db.query(query, [req.params.emp_id], (err, data) => {
     if (err) {
       res.json({ error: err });
@@ -33,7 +33,7 @@ router.get("/byId/:emp_id", validateToken, (req, res) => {
 });
 
 router.get("/bySupervisorId/:supervisor_id", validateToken, (req, res) => {
-  const query = "select * from leave_application where supervisor_id = ?";
+  const query = "select * from leave_application_view where supervisor_id = ?";
   db.query(query, [req.params.supervisor_id], (err, data) => {
     if (err) {
       res.json({ error: err });
@@ -51,6 +51,18 @@ router.put("/", validateToken, (req, res) => {
       res.json({ error: err });
     } else {
       res.json({ success: "leave status updated successfully" });
+    }
+  });
+});
+
+router.put("/delete", validateToken, (req, res) => {
+  const { req_id } = req.body;
+  const query = "delete from leave_application where req_id = ? ;";
+  db.query(query, [req_id], (err, data) => {
+    if (err) {
+      res.json({ error: err });
+    } else {
+      res.json({ success: "leave status deleted successfully" });
     }
   });
 });

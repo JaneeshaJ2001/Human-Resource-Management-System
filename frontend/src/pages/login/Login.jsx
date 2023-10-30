@@ -11,18 +11,58 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { AuthContext } from "../../helpers/AuthContext";
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+  const { authState, setAuthState } = useContext(AuthContext);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      username: data.get("username"),
-      password: data.get("password"),
-    });
+    await axios
+      .post("http://localhost:1234/auth/login", {
+        username: data.get("username"),
+        password: data.get("password"),
+      })
+      .then(async (response) => {
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          localStorage.setItem("accessToken", response.data.accessToken);
+          // console.log(response.data);
+          await setAuthState({
+            username: response.data.username,
+            emp_id: response.data.emp_id,
+            role_id: response.data.role_id,
+            status: true,
+            personal_details: {},
+          });
+          await axios
+            .get(
+              `http://localhost:1234/employee/byId/${response.data.emp_id}`,
+              {
+                headers: { accessToken: localStorage.getItem("accessToken") },
+              }
+            )
+            .then(async (res) => {
+              if (res.data.error) {
+                console.log(res.data.error);
+              } else {
+                // console.log(res.data);
+                await setAuthState((prevAuthState) => {
+                  return { ...prevAuthState, personal_details: res.data[0] };
+                });
+              }
+            });
+          navigate("/");
+        }
+      });
   };
 
   return (
@@ -94,7 +134,12 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="/signup" variant="body2">
+                  Create Account !
+                </Link>
+              </Grid>
+              <Grid item xs>
+                <Link href="/forgotpassword" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>

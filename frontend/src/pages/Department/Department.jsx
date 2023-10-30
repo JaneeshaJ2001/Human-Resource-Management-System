@@ -1,7 +1,7 @@
 import {
   Box,
   Button,
-  Fab,
+  Paper,
   Typography,
   Dialog,
   DialogTitle,
@@ -10,79 +10,87 @@ import {
 import { DataGrid } from "@mui/x-data-grid";
 import { mockDataDepartment } from "../../data/MockData2";
 import AddDepartment from "./AddDepartment";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+
+import { AuthContext } from "../../helpers/AuthContext";
+import { useNavigate } from "react-router-dom";
+
+import axios from "axios";
+import moment from "moment";
 
 /*
 <Fab
         variant="extended"
         size="medium"
         color="primary"
-        onClick={() => setOpenPopup(true)}
+        onClick={() => setOpenPopupAddDepartment(true)}
       >
         <AddOutlinedIcon sx={{ mr: 1 }} />
         Add Department
       </Fab>
       */
 
-const columns = [
+const columnsForDepartments = [
   {
-    field: "id",
+    field: "dept_id",
     headerName: "ID",
-    type: "number",
     headerAlign: "left",
     align: "left",
     flex: 0.5,
   },
   {
-    field: "name",
+    field: "dept_name",
     headerName: "Name",
-    flex: 1,
-  },
-  {
-    field: "relationship",
-    headerName: "Relationship",
-  },
-  {
-    field: "address",
-    headerName: "Address",
     flex: 2,
   },
-
   {
-    field: "mobilePhone",
-    headerName: "Mobile Phone",
+    field: "current_no_of_employees",
+    headerName: "Employee Count",
     flex: 1,
   },
   {
-    field: "homePhone",
-    headerName: "Home Phone",
-    flex: 1,
-  },
-
-  {
-    field: "edditedBy",
-    headerName: "Edited By",
+    field: "max_no_of_employees",
+    headerName: "Capacity",
     flex: 1,
   },
   {
-    field: "date",
-    headerName: "Date",
+    field: "created_at",
+    headerName: "Date Created",
     flex: 1,
-  },
-
-  {
-    field: "action",
-    headerName: "Action",
-
-    flex: 1,
+    valueFormatter: (params) => moment(params?.value).format("DD-MM-YYYY"),
   },
 ];
 
 function Department() {
-  const [openPopup, setOpenPopup] = useState(false);
+  const [openPopupAddDepartment, setOpenPopupAddDepartment] = useState(false);
+
+  const { authState } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const [departments, setDepartments] = useState([]);
+
+  useEffect(() => {
+    if (!authState.status) {
+      navigate("/login");
+    } else if (authState.role_id === "r-003" || authState.role_id === "r-004") {
+      navigate("/");
+    } else {
+      axios
+        .get("http://localhost:1234/department", {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        })
+        .then((response) => {
+          if (response.data.error) {
+            console.log(response.data.error);
+          } else {
+            setDepartments(response.data);
+          }
+        });
+    }
+  }, [authState]);
 
   return (
     <Box>
@@ -94,20 +102,23 @@ function Department() {
         variant="outlined"
         startIcon={<AddOutlinedIcon />}
         sx={{ mb: 4 }}
-        onClick={() => setOpenPopup(true)}
+        onClick={() => setOpenPopupAddDepartment(true)}
       >
         Add Department
       </Button>
+      <Paper>
+        <DataGrid
+          rows={departments}
+          getRowId={(row) => row.dept_id}
+          columns={columnsForDepartments}
+          PageSize={25}
+          rowsPerPageOption={[25]}
+          autoHeight
+          rowHeight={70}
+        />
+      </Paper>
 
-      <DataGrid
-        rows={mockDataDepartment}
-        columns={columns}
-        PageSize={25}
-        rowsPerPageOption={[25]}
-        autoHeight
-        rowHeight={70}
-      />
-      <Dialog open={openPopup} maxWidth="xl">
+      <Dialog open={openPopupAddDepartment} maxWidth="xl">
         <DialogTitle>
           <div style={{ display: "flex", alignContent: "space-between" }}>
             <Typography variant="h6" component="div" style={{ flexGrow: 1 }}>
@@ -115,7 +126,7 @@ function Department() {
             </Typography>
             <Button
               onClick={() => {
-                setOpenPopup(false);
+                setOpenPopupAddDepartment(false);
               }}
             >
               <CloseOutlinedIcon />
@@ -123,7 +134,9 @@ function Department() {
           </div>
         </DialogTitle>
         <DialogContent dividers>
-          <AddDepartment />
+          <AddDepartment
+            departments={departments.map((department) => department.dept_name)}
+          />
         </DialogContent>
       </Dialog>
     </Box>

@@ -21,6 +21,12 @@ const DepartmentsRoute = require("./routes/Departments");
 app.use("/department", DepartmentsRoute);
 const LeaveRecordsRoute = require("./routes/LeaveRecords");
 app.use("/leaveRecord", LeaveRecordsRoute);
+const RolesRoute = require("./routes/Roles");
+app.use("/role", RolesRoute);
+const EmployeeStatusesRoute = require("./routes/EmployeeStatuses");
+app.use("/employeeStatus", EmployeeStatusesRoute);
+const BranchesRoute = require("./routes/Branches");
+app.use("/branch", BranchesRoute);
 
 app.listen(1234, () => {
   console.log("server running on port 1234");

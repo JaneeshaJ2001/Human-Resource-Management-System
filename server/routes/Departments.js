@@ -19,7 +19,7 @@ router.post("/", validateToken, (req, res) => {
 });
 
 router.get("/", validateToken, (req, res) => {
-  const query = "select * from department";
+  const query = "select * from department_view";
   db.query(query, (err, data) => {
     if (err) {
       res.json({ error: err });
