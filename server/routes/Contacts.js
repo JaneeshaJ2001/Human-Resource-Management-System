@@ -54,7 +54,7 @@ router.put("/", validateToken, (req, res) => {
   });
 });
 
-router.delete("/", validateToken, (req, res) => {
+router.put("/delete", validateToken, (req, res) => {
   const { contact_number } = req.body;
   const query = "delete from contact where emp_id = ? and contact_number = ?";
   db.query(query, [req.user.emp_id, contact_number], (err, data) => {

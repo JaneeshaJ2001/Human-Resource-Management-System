@@ -23,7 +23,7 @@ function AppRoutes() {
       <Route path="/leave" element={<Leave />} />
       <Route path="/employee" element={<Employee />} />
       <Route path="/department" element={<Department />} />
-      {/* <Route path="/document" element={<Doc1 />} /> */}
+      <Route path="/document" element={<Doc1 />} />
       {/* <Route path="/addemp" element={<AddEmployee />} /> */}
       <Route exact path="/login" element={<Login />} />
       <Route exact path="/signup" element={<SignUp />} />

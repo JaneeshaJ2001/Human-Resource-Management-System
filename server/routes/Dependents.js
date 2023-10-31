@@ -52,7 +52,7 @@ router.get("/", validateToken, (req, res) => {
 });
 
 router.get("/byId/:emp_id", validateToken, (req, res) => {
-  const query = "select dependent.name, DATE(dependent.b_date) as b_date, concat(address.PB_number,',',address.street_name,',',address.city_name,',',address.country) as address, gender, relationship, dependent_id from dependent left join address on dependent.address_id = address.address_id where emp_id = ?";
+  const query = "select dependent.name, DATE(dependent.b_date) as b_date, address.PB_number ,address.street_name ,address.city_name ,address.country, gender, relationship, dependent_id from dependent left join address on dependent.address_id = address.address_id where emp_id = ?";
   db.query(query, [req.params.emp_id], (err, data) => {
     if (err) {
       res.json({ error: err });
@@ -62,7 +62,7 @@ router.get("/byId/:emp_id", validateToken, (req, res) => {
   });
 });
 
-router.delete("/", validateToken, (req, res) => {
+router.put("/delete", validateToken, (req, res) => {
   const query = "delete from dependent where dependent_id = ?";
   db.query(query, [req.body.dependent_id], (err, data) => {
     if (err) {

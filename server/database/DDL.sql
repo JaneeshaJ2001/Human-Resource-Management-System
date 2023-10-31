@@ -1620,3 +1620,24 @@ leave_application.created_at, leave_application.updated_at
 from (leave_application left join leave_type_names 
 on (leave_application.leave_type_id = leave_type_names.leave_type_id)) left join employee on (employee.emp_id = leave_application.emp_id) ;
 
+
+drop view if exists leave_app_set;
+create view leave_app_set as
+select 
+leave_application.req_id,leave_application.leave_type_id,leave_type_names.leave_type_name,leave_application.reason,
+leave_application.start_date,leave_application.end_date, datediff(leave_application.end_date,leave_application.start_date) as no_of_days ,leave_application.supervisor_id,
+leave_application.req_status, leave_application.emp_id, role.pay_grade, number_of_leaves.default_days, leave_application.created_at, leave_application.updated_at
+from leave_application left join employee on (leave_application.emp_id = employee.emp_id) left join role on (employee.job_id = role.job_id) left join number_of_leaves on (leave_application.leave_type_id = number_of_leaves.leave_type_id
+ and role.pay_grade = number_of_leaves.pay_grade) left join leave_type_names on (leave_application.leave_type_id = leave_type_names.leave_type_id);
+
+
+drop view if exists leave_count_set;
+create view leave_count_set as 
+select emp_id, leave_type_id, leave_type_name, sum(no_of_days) as total_no_of_leaves_taken, default_days from leave_app_set where req_status = "Accepted" group by emp_id,leave_type_id; 
+
+
+drop view if exists leave_count_per_employee_view;
+create view leave_count_per_employee_view as
+select
+employee.emp_id, number_of_leaves.leave_type_id, leave_type_names.leave_type_name, ifnull(leave_count_set.total_no_of_leaves_taken,0) as total_no_of_leaves_taken, number_of_leaves.default_days
+from employee left join role on (employee.job_id = role.job_id) join number_of_leaves on (role.pay_grade = number_of_leaves.pay_grade) left join leave_type_names on (number_of_leaves.leave_type_id = leave_type_names.leave_type_id)  left join leave_count_set on (employee.emp_id = leave_count_set.emp_id and number_of_leaves.leave_type_id = leave_count_set.leave_type_id) order by employee.emp_id, number_of_leaves.leave_type_id;

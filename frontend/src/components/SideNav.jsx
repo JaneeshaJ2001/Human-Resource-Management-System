@@ -134,13 +134,13 @@ function SideNav() {
           </MenuItem>
         )}
 
-        {/* <MenuItem
+        <MenuItem
           active={location.pathname === "/document"}
           component={<Link to="/document" />}
           icon={<DescriptionOutlined />}
         >
           <Typography variant="body2"> Documents </Typography>
-        </MenuItem> */}
+        </MenuItem>
       </Menu>
     </Sidebar>
   );
