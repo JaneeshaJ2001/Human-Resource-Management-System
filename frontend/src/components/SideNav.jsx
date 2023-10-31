@@ -27,7 +27,7 @@ function SideNav() {
   if (
     location.pathname === "/login" ||
     location.pathname === "/signup" ||
-    location.pathname === "/forgotpassword" 
+    location.pathname === "/forgotpassword"
   ) {
     return null;
   }
@@ -50,7 +50,6 @@ function SideNav() {
           alt="Profile name"
           src="/src/assets/user.png"
           // src="../src/assets/user.png"
-
         />
         {!collapsed ? (
           <Typography variant="body2" sx={styles.profileName}>
@@ -134,13 +133,13 @@ function SideNav() {
           </MenuItem>
         )}
 
-        {/* <MenuItem
+        <MenuItem
           active={location.pathname === "/document"}
           component={<Link to="/document" />}
           icon={<DescriptionOutlined />}
         >
           <Typography variant="body2"> Documents </Typography>
-        </MenuItem> */}
+        </MenuItem>
       </Menu>
     </Sidebar>
   );
