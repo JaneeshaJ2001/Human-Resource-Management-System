@@ -121,16 +121,21 @@ CREATE TABLE emp_status (
     )
 );
 
-CREATE TABLE custom_Attributes (
+CREATE TABLE custom_attributes (
     attribute_id varchar(10),
     attribute_name varchar(50) NOT NULL,
-    data_type varchar(50) NOT NULL,
     description varchar(100),
-    updated_date date NOT NULL,
-    updated_at timestamp,
-    created_at timestamp,
     PRIMARY KEY (attribute_id)
 );
+
+create table custom_attribute_value(
+	attribute_id varchar(10),
+    emp_id varchar(10),
+	value varchar(255),
+    PRIMARY KEY (attribute_id, emp_id),
+    foreign key (attribute_id) references custom_attributes(attribute_id) on delete cascade on update cascade,
+    foreign key (emp_id) references employee(emp_id) on delete cascade on update cascade
+)
 
 CREATE TABLE number_of_leaves (
     pay_grade int,

@@ -346,7 +346,7 @@ function Profile() {
             rowsPerPageOption={[25]}
             autoHeight
             rowHeight={70}
-            onRowClick={(params) => {
+            onRowDoubleClick={(params) => {
               setUpdateContact({
                 status: true,
                 old_number: params.row.contact_number,
@@ -505,7 +505,7 @@ function Profile() {
             rowsPerPageOption={[25]}
             autoHeight
             rowHeight={70}
-            onRowClick={(params) => {
+            onRowDoubleClick={(params) => {
               setUpdateDependent({
                 status: true,
                 dependent_id: params.row.dependent_id,

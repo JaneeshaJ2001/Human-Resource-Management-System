@@ -27,6 +27,8 @@ const EmployeeStatusesRoute = require("./routes/EmployeeStatuses");
 app.use("/employeeStatus", EmployeeStatusesRoute);
 const BranchesRoute = require("./routes/Branches");
 app.use("/branch", BranchesRoute);
+const CustomAttributesRoute = require("./routes/CustomAttributes");
+app.use("/customAttribute", CustomAttributesRoute);
 
 app.listen(1234, () => {
   console.log("server running on port 1234");

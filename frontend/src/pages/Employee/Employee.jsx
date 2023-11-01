@@ -26,6 +26,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
 const columnsForEmployees = [
   {
@@ -164,6 +165,24 @@ const columnsForLeaveHistory = [
   },
 ];
 
+const columnsForCustomAttributes = [
+  {
+    field: "attribute_id",
+    headerName: "ID",
+    flex: 0.5,
+  },
+  {
+    field: "attribute_name",
+    headerName: "Name",
+    flex: 1,
+  },
+  {
+    field: "description",
+    headerName: "Description",
+    flex: 2,
+  },
+];
+
 function Employee() {
   const [value, setValue] = useState(0);
 
@@ -201,6 +220,79 @@ function Employee() {
       });
   };
 
+  const [customAttributes, setCustomAttributes] = useState([]);
+
+  const [addAttribute, setAddAttribute] = useState({
+    status: false,
+    attribute_name: "",
+    description: "",
+  });
+
+  const addAttr = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:1234/customAttribute/add", addAttribute, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        if (response.data.error) {
+          console.log(response.data.error);
+        } else {
+          alert("Attribute successfully added");
+          window.location.reload();
+        }
+      });
+  };
+
+  const [updateAttribute, setUpdateAttribute] = useState({
+    status: false,
+    attribute_id: "",
+    attribute_name: "",
+    description: "",
+  });
+
+  const changeAttribute = () => {
+    axios
+      .put("http://localhost:1234/customAttribute/update", updateAttribute, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        if (response.data.error) {
+          console.log(response.data.error);
+        } else {
+          alert("Attribute updated successfully");
+          setUpdateAttribute({
+            status: false,
+            attribute_id: "",
+            attribute_name: "",
+            description: "",
+          });
+          window.location.reload();
+        }
+      });
+  };
+
+  const deleteAttribute = () => {
+    axios
+      .put("http://localhost:1234/customAttribute/delete", updateAttribute, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        if (response.data.error) {
+          console.log(response.data.error);
+        } else {
+          alert("Attribute deleted successfully");
+          setUpdateAttribute({
+            status: false,
+            attribute_id: "",
+            attribute_name: "",
+            description: "",
+          });
+          window.location.reload();
+        }
+      });
+  };
+
   useEffect(() => {
     if (!authState.status) {
       navigate("/login");
@@ -216,6 +308,18 @@ function Employee() {
             console.log(response.data.error);
           } else {
             setEmployees(response.data);
+          }
+        });
+      axios
+        .get("http://localhost:1234/customAttribute", {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        })
+        .then((response) => {
+          if (response.data.error) {
+            console.log(response.data.error);
+          } else {
+            console.log(response.data);
+            setCustomAttributes(response.data);
           }
         });
     } else if (authState.role_id === "r-003") {
@@ -248,6 +352,8 @@ function Employee() {
     }
   }, [authState]);
 
+  // console.log(customAttributes);
+
   return (
     <Box>
       <Typography sx={styles.pageTitle} variant="h5">
@@ -270,6 +376,9 @@ function Employee() {
           )}
           {authState.role_id === "r-002" && (
             <Tab label="Add Employee" id="tab-1" />
+          )}
+          {authState.role_id === "r-002" && (
+            <Tab label="Custom Attributes" id="tab-2" />
           )}
         </Tabs>
       </Box>
@@ -403,6 +512,225 @@ function Employee() {
       {authState.role_id === "r-002" && (
         <TabPanel value={value} index={1}>
           <AddEmployee />
+        </TabPanel>
+      )}
+
+      {authState.role_id === "r-002" && (
+        <TabPanel value={value} index={2}>
+          <Button
+            variant="outlined"
+            startIcon={<AddOutlinedIcon />}
+            sx={{ mb: 4 }}
+            onClick={() =>
+              setAddAttribute({
+                status: true,
+                attribute_name: "",
+                description: "",
+              })
+            }
+          >
+            Add Custom Attribute
+          </Button>
+          <DataGrid
+            rows={customAttributes}
+            getRowId={(row) => row.attribute_id}
+            columns={columnsForCustomAttributes}
+            PageSize={25}
+            rowsPerPageOption={[25]}
+            autoHeight
+            rowHeight={70}
+            onRowDoubleClick={(params) => {
+              setUpdateAttribute({
+                status: true,
+                attribute_id: params.row.attribute_id,
+                attribute_name: params.row.attribute_name,
+                description: params.row.description,
+              });
+            }}
+          />
+          <Dialog open={addAttribute.status} maxWidth="xl">
+            <DialogTitle>
+              <div style={{ display: "flex", alignContent: "space-between" }}>
+                <Typography
+                  variant="h6"
+                  component="div"
+                  style={{ flexGrow: 1 }}
+                >
+                  Add Custom Attribute
+                </Typography>
+                <Button
+                  onClick={() => {
+                    setAddAttribute({
+                      status: false,
+                      attribute_name: "",
+                      description: "",
+                    });
+                  }}
+                >
+                  <CloseOutlinedIcon />
+                </Button>
+              </div>
+            </DialogTitle>
+            <DialogContent dividers>
+              <form onSubmit={addAttr}>
+                <Box sx={{ p: 3 }}>
+                  <Grid>
+                    <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      id="attribute_name"
+                      label="Attribute Name"
+                      name="attribute_name"
+                      autoFocus
+                      inputProps={{ maxLength: 15 }}
+                      value={addAttribute.attribute_name}
+                      onChange={(e) =>
+                        setAddAttribute({
+                          ...addAttribute,
+                          [e.target.name]: e.target.value,
+                        })
+                      }
+                    />
+                  </Grid>
+                  <Grid>
+                    <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      id="description"
+                      label="Description"
+                      name="description"
+                      autoFocus
+                      inputProps={{ maxLength: 100 }}
+                      value={addAttribute.description}
+                      onChange={(e) =>
+                        setAddAttribute({
+                          ...addAttribute,
+                          [e.target.name]: e.target.value,
+                        })
+                      }
+                    />
+                  </Grid>
+
+                  <Grid>
+                    <Button
+                      type="submit"
+                      style={{ width: "100%" }}
+                      variant="contained"
+                    >
+                      Add Attribute
+                    </Button>
+                  </Grid>
+                </Box>
+              </form>
+            </DialogContent>
+          </Dialog>
+
+          <Dialog open={updateAttribute.status} maxWidth="xl">
+            <DialogTitle>
+              <div style={{ display: "flex", alignContent: "space-between" }}>
+                <Typography
+                  variant="h6"
+                  component="div"
+                  style={{ flexGrow: 1 }}
+                >
+                  Update Attribute
+                </Typography>
+                <Button
+                  onClick={() => {
+                    setUpdateAttribute({
+                      status: false,
+                      attribute_id: "",
+                      attribute_name: "",
+                      description: "",
+                    });
+                  }}
+                >
+                  <CloseOutlinedIcon />
+                </Button>
+              </div>
+            </DialogTitle>
+            <DialogContent dividers>
+              <form>
+                <Box sx={{ p: 3 }}>
+                  <Grid>
+                    <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      id="attribute_id"
+                      label="ID"
+                      name="attribute_id"
+                      autoFocus
+                      inputProps={{ maxLength: 15 }}
+                      value={updateAttribute.attribute_id}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </Grid>
+                  <Grid>
+                    <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      id="attribute_name"
+                      label="Attribute Name"
+                      name="attribute_name"
+                      autoFocus
+                      inputProps={{ maxLength: 15 }}
+                      value={updateAttribute.attribute_name}
+                      onChange={(e) =>
+                        setUpdateAttribute({
+                          ...updateAttribute,
+                          [e.target.name]: e.target.value,
+                        })
+                      }
+                    />
+                  </Grid>
+                  <Grid>
+                    <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      id="description"
+                      label="Description"
+                      name="description"
+                      autoFocus
+                      inputProps={{ maxLength: 100 }}
+                      value={updateAttribute.description}
+                      onChange={(e) =>
+                        setUpdateAttribute({
+                          ...updateAttribute,
+                          [e.target.name]: e.target.value,
+                        })
+                      }
+                    />
+                  </Grid>
+
+                  <Grid>
+                    <Button
+                      style={{ width: "100%" }}
+                      variant="contained"
+                      onClick={changeAttribute}
+                    >
+                      Update Attribute
+                    </Button>
+                  </Grid>
+                  <Grid>
+                    <Button
+                      style={{ width: "100%" }}
+                      variant="contained"
+                      onClick={deleteAttribute}
+                    >
+                      Delete Attribute
+                    </Button>
+                  </Grid>
+                </Box>
+              </form>
+            </DialogContent>
+          </Dialog>
         </TabPanel>
       )}
     </Box>
