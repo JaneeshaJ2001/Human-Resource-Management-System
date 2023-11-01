@@ -3,121 +3,119 @@ import Box from "@mui/material/Box";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
 const columns = [
-  { field: "id", headerName: "ID", width: 90 },
+  { field: "emp_id", headerName: "ID", width: 90 },
   {
     field: "name",
     headerName: "Name",
-    width: 150,
-    editable: true,
+    width: 200,
+    valueGetter: (params) => {
+      return `${params.row.first_name || ""} ${params.row.last_name || ""}`;
+    },
   },
   {
-    field: "designation",
+    field: "job_title",
     headerName: "Designation",
     width: 150,
-    editable: true,
   },
-
   {
-    field: "status",
+    field: "pay_grade",
+    headerName: "Pay Grade",
+    width: 100,
+  },
+  {
+    field: "status_name",
     headerName: "Status",
-
     width: 110,
-    editable: true,
   },
   {
-    field: "department",
+    field: "dept_name",
     headerName: "Department",
-
-    width: 110,
-    editable: true,
+    width: 150,
   },
   {
-    field: "supervisor",
+    field: "SupervisorId",
     headerName: "Supervisor",
-
     width: 110,
-    editable: true,
   },
   {
-    field: "branch",
+    field: "branch_name",
     headerName: "Branch",
-
     width: 110,
-    editable: true,
   },
 ];
 
-const rows = [
-  {
-    id: 1,
-    name: "Snow",
-    designation: "Jon",
-    status: 35,
-    department: "IT",
-    supervisor: "Raj",
-    branch: "Mumbai",
-  },
-  {
-    id: 2,
-    name: "Snow",
-    designation: "Jon",
-    status: 35,
-    department: "IT",
-    supervisor: "Raj",
-    branch: "Mumbai",
-  },
-  {
-    id: 3,
-    name: "Snow",
-    designation: "Jon",
-    status: 35,
-    department: "IT",
-    supervisor: "Raj",
-    branch: "Mumbai",
-  },
-  {
-    id: 4,
-    name: "Snow",
-    designation: "Jon",
-    status: 35,
-    department: "IT",
-    supervisor: "Raj",
-    branch: "Mumbai",
-  },
-  {
-    id: 5,
-    name: "Snow",
-    designation: "Jon",
-    status: 35,
-    department: "IT",
-    supervisor: "Raj",
-    branch: "Mumbai",
-  },
-  {
-    id: 6,
-    name: "Snow",
-    designation: "Jon",
-    status: 35,
-    department: "IT",
-    supervisor: "Raj",
-    branch: "Mumbai",
-  },
-  {
-    id: 7,
-    name: "Snow",
-    designation: "Jon",
-    status: 35,
-    department: "IT",
-    supervisor: "Raj",
-    branch: "Mumbai",
-  },
-];
+// const rows = [
+//   {
+//     id: 1,
+//     name: "Snow",
+//     designation: "Jon",
+//     status: 35,
+//     department: "IT",
+//     supervisor: "Raj",
+//     branch: "Mumbai",
+//   },
+//   {
+//     id: 2,
+//     name: "Snow",
+//     designation: "Jon",
+//     status: 35,
+//     department: "IT",
+//     supervisor: "Raj",
+//     branch: "Mumbai",
+//   },
+//   {
+//     id: 3,
+//     name: "Snow",
+//     designation: "Jon",
+//     status: 35,
+//     department: "IT",
+//     supervisor: "Raj",
+//     branch: "Mumbai",
+//   },
+//   {
+//     id: 4,
+//     name: "Snow",
+//     designation: "Jon",
+//     status: 35,
+//     department: "IT",
+//     supervisor: "Raj",
+//     branch: "Mumbai",
+//   },
+//   {
+//     id: 5,
+//     name: "Snow",
+//     designation: "Jon",
+//     status: 35,
+//     department: "IT",
+//     supervisor: "Raj",
+//     branch: "Mumbai",
+//   },
+//   {
+//     id: 6,
+//     name: "Snow",
+//     designation: "Jon",
+//     status: 35,
+//     department: "IT",
+//     supervisor: "Raj",
+//     branch: "Mumbai",
+//   },
+//   {
+//     id: 7,
+//     name: "Snow",
+//     designation: "Jon",
+//     status: 35,
+//     department: "IT",
+//     supervisor: "Raj",
+//     branch: "Mumbai",
+//   },
+// ];
 
-export default function DataGridDemo() {
+export default function DataGridDemo({ result }) {
   return (
     <Box sx={{ height: 407, width: "100%" }}>
       <DataGrid
-        rows={rows}
+        rows={result}
+        getRowId={(row) => row.emp_id}
         columns={columns}
         initialState={{
           pagination: {

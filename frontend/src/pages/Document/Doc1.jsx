@@ -9,6 +9,8 @@ import EmployeeByTitle from "./EmployeeByJobTitle";
 import EmployeeByPayGrade from "./EmployeeByPayGrade";
 import EmployeeByDepartment from "./EmployeeByDepartment";
 import { Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../helpers/AuthContext";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -52,6 +54,20 @@ export default function CustomizedAccordions() {
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
+
+  const navigate = useNavigate();
+  const { authState } = React.useContext(AuthContext);
+
+  React.useEffect(() => {
+    if (!authState.status) {
+      navigate("/login");
+    } else if (authState.role_id === "r-004") {
+      navigate("/");
+    } else if (authState.role_id === "r-003") {
+      navigate("/profile");
+    } else if (authState.role_id === "r-002") {
+    }
+  }, [authState]);
 
   return (
     <div>

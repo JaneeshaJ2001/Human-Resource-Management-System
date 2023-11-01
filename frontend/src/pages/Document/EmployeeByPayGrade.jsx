@@ -18,31 +18,43 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import DataGrid1 from "./DataGrid1";
 
 import { useState } from "react";
+import axios from "axios";
 
 function EmployeeByPayGrade() {
   const [openPopupEmployeeByPayGrade, setOpenPopupEmployeeByPayGrade] =
     useState(false);
 
-  const [payGradeDetails, setpayGradeDetails] = useState({
-    pay_grade_name: "",
-  });
+  const [payGrade, setPayGrade] = useState("");
+
+  const [employeeByPayGrade, setEmployeeByPayGrade] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // console.log(payGrade);
+    axios
+      .get(`http://localhost:1234/employee/byPayGrade/${payGrade}`)
+      .then((response) => {
+        if (response.data.error) {
+          console.log(response.data.error);
+        } else {
+          setEmployeeByPayGrade(response.data);
+          setOpenPopupEmployeeByPayGrade(true);
+        }
+      });
   };
 
-  const handleChange = (event) => {
-    setpayGradeDetails({
-      ...payGradeDetails,
-      [event.target.name]: event.target.value,
-    });
-  };
+  // const handleChange = (event) => {
+  //   setpayGradeDetails({
+  //     ...payGradeDetails,
+  //     [event.target.name]: event.target.value,
+  //   });
+  // };
 
-  const handleReset = () => {
-    setpayGradeDetails({
-      pay_grade_name: "",
-    });
-  };
+  // const handleReset = () => {
+  //   setpayGradeDetails({
+  //     pay_grade_name: "",
+  //   });
+  // };
 
   return (
     <Box sx={{ p: 2, ml: 10 }}>
@@ -53,9 +65,9 @@ function EmployeeByPayGrade() {
             labelId="pay_grade_label"
             id="pay_grade"
             name="pay_grade_name"
-            value={payGradeDetails.pay_grade_name}
+            value={payGrade}
             label="Select Pay Grade"
-            onChange={handleChange}
+            onChange={(e) => setPayGrade(e.target.value)}
           >
             <MenuItem value={"1"}>1</MenuItem>
             <MenuItem value={"2"}>2</MenuItem>
@@ -66,7 +78,7 @@ function EmployeeByPayGrade() {
 
         <Stack direction="row" spacing={2}>
           <Button
-            onClick={handleReset}
+            onClick={() => setPayGrade("")}
             variant="outlined"
             startIcon={<DeleteOutlineOutlinedIcon />}
           >
@@ -76,7 +88,6 @@ function EmployeeByPayGrade() {
             type="submit"
             variant="contained"
             endIcon={<SendOutlinedIcon />}
-            onClick={() => setOpenPopupEmployeeByPayGrade(true)}
           >
             Submit
           </Button>
@@ -99,7 +110,7 @@ function EmployeeByPayGrade() {
           </div>
         </DialogTitle>
         <DialogContent>
-          <DataGrid1 />
+          <DataGrid1 result={employeeByPayGrade} />
         </DialogContent>
       </Dialog>
     </Box>

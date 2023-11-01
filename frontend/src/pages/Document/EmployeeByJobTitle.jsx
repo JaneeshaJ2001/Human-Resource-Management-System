@@ -17,31 +17,51 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import DataGrid1 from "./DataGrid1";
 import { useState } from "react";
+import axios from "axios";
 
 function EmployeeByTitle() {
   const [openPopupEmployeeByJobTitle, setOpenPopupEmployeeByJobTitle] =
     useState(false);
 
-  const [jobTitleDetails, setJobTitleDetails] = useState({
-    job_title_name: "",
-  });
+  const [jobTitle, setJobTitle] = useState("");
+
+  const [employeeByJobTitle, setEmployeeByJobTitle] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-  };
-
-  const handleChange = (event) => {
-    setJobTitleDetails({
-      ...jobTitleDetails,
-      [event.target.name]: event.target.value,
-    });
+    // console.log(jobTitle);
+    axios
+      .get(`http://localhost:1234/employee/byJobTitle/${jobTitle}`)
+      .then((response) => {
+        if (response.data.error) {
+          console.log(response.data.error);
+        } else {
+          setEmployeeByJobTitle(response.data);
+          setOpenPopupEmployeeByJobTitle(true);
+        }
+      });
   };
 
   const handleReset = () => {
-    setJobTitleDetails({
-      job_title_name: "",
-    });
+    setJobTitle("");
   };
+
+  const [jobTitles, setJobTitles] = useState([]);
+
+  React.useEffect(() => {
+    axios
+      .get("http://localhost:1234/role/jobTitle", {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        if (response.data.error) {
+          console.log(response.data.error);
+        } else {
+          // console.log(response.data);
+          setJobTitles(response.data);
+        }
+      });
+  }, []);
 
   return (
     <Box sx={{ p: 2, ml: 10 }}>
@@ -52,14 +72,21 @@ function EmployeeByTitle() {
             labelId="job_title_label"
             id="job_title"
             name="job_title_name"
-            value={jobTitleDetails.job_title_name}
+            value={jobTitle}
             label="Select Job Title"
-            onChange={handleChange}
+            onChange={(e) => setJobTitle(e.target.value)}
           >
-            <MenuItem value={"HR Manager"}>HR Manager</MenuItem>
+            {jobTitles.map((title, id) => {
+              return (
+                <MenuItem value={title.job_title} key={id}>
+                  {title.job_title}
+                </MenuItem>
+              );
+            })}
+            {/* <MenuItem value={"HR Manager"}>HR Manager</MenuItem>
             <MenuItem value={"QA Engineer"}>QA Engineer</MenuItem>
             <MenuItem value={"Accountant"}>Accountant</MenuItem>
-            <MenuItem value={"Software Engineer"}>Software Engineer</MenuItem>
+            <MenuItem value={"Software Engineer"}>Software Engineer</MenuItem> */}
           </Select>
         </FormControl>
 
@@ -75,7 +102,7 @@ function EmployeeByTitle() {
             type="submit"
             variant="contained"
             endIcon={<SendOutlinedIcon />}
-            onClick={() => setOpenPopupEmployeeByJobTitle(true)}
+            // onClick={() => setOpenPopupEmployeeByJobTitle(true)}
           >
             Submit
           </Button>
@@ -98,7 +125,7 @@ function EmployeeByTitle() {
           </div>
         </DialogTitle>
         <DialogContent>
-          <DataGrid1 />
+          <DataGrid1 result={employeeByJobTitle} />
         </DialogContent>
       </Dialog>
     </Box>

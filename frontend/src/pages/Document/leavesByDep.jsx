@@ -18,6 +18,8 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import PieChart1 from "./PieChart1";
 import { useState } from "react";
+import axios from "axios";
+import DataGrid2 from "./DataGrid2";
 
 function LeavesByDep() {
   const [openPopupTotalLeaveGroupedByDep, setOpenPopupTotalLeaveGroupedByDep] =
@@ -25,14 +27,25 @@ function LeavesByDep() {
 
   let today = new Date().toISOString().slice(0, 10);
   const [leaveDetails, setLeaveDetails] = useState({
-    leave_type_name: "",
-    department_name: "",
-    start_date: today,
-    end_date: today,
+    dept_name: "",
+    start_range: today,
+    end_range: today,
   });
+
+  const [leaveCountResult, setLeaveCountResult] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // console.log(leaveDetails);
+    axios
+      .get(
+        `http://localhost:1234/leaveApplication/byDeptTime/${leaveDetails.start_range}&${leaveDetails.end_range}&${leaveDetails.dept_name}`
+      )
+      .then((response) => {
+        // console.log(response.data);
+        setLeaveCountResult(response.data);
+      });
+    setOpenPopupTotalLeaveGroupedByDep(true);
   };
 
   const handleChange = (event) => {
@@ -44,12 +57,28 @@ function LeavesByDep() {
 
   const handleReset = () => {
     setLeaveDetails({
-      leave_type_name: "",
-      department_name: "",
-      start_date: today,
-      end_date: today,
+      dept_name: "",
+      start_range: today,
+      end_range: today,
     });
   };
+
+  const [departments, setDepartments] = useState([]);
+
+  React.useEffect(() => {
+    axios
+      .get("http://localhost:1234/department", {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        if (response.data.error) {
+          console.log(response.data.error);
+        } else {
+          // console.log(response.data);
+          setDepartments(response.data);
+        }
+      });
+  }, []);
 
   return (
     <Box sx={{ p: 2, ml: 10 }}>
@@ -60,9 +89,9 @@ function LeavesByDep() {
             variant="outlined"
             color="secondary"
             label="Start Date"
-            name="start_date"
+            name="start_range"
             onChange={handleChange}
-            value={leaveDetails.start_date}
+            value={leaveDetails.start_range}
             required
             style={{ width: 400 }}
           />
@@ -71,9 +100,9 @@ function LeavesByDep() {
             variant="outlined"
             color="secondary"
             label="End Date"
-            name="end_date"
+            name="end_range"
             onChange={handleChange}
-            value={leaveDetails.end_date}
+            value={leaveDetails.end_range}
             required
             style={{ width: 400 }}
           />
@@ -84,15 +113,22 @@ function LeavesByDep() {
           <Select
             labelId="department_label"
             id="department_type"
-            name="department_name"
-            value={leaveDetails.department_name}
+            name="dept_name"
+            value={leaveDetails.dept_name}
             label="Select Department"
             onChange={handleChange}
           >
-            <MenuItem value={"HR"}>HR</MenuItem>
+            {departments.map((dept, id) => {
+              return (
+                <MenuItem value={dept.dept_name} key={id}>
+                  {dept.dept_name}
+                </MenuItem>
+              );
+            })}
+            {/* <MenuItem value={"HR"}>HR</MenuItem>
             <MenuItem value={"Accounting"}>Accounting</MenuItem>
             <MenuItem value={"IT"}>IT</MenuItem>
-            <MenuItem value={"Computer"}>Computer</MenuItem>
+            <MenuItem value={"Computer"}>Computer</MenuItem> */}
           </Select>
         </FormControl>
 
@@ -108,7 +144,6 @@ function LeavesByDep() {
             type="submit"
             variant="contained"
             endIcon={<SendOutlinedIcon />}
-            onClick={() => setOpenPopupTotalLeaveGroupedByDep(true)}
           >
             Submit
           </Button>
@@ -131,9 +166,12 @@ function LeavesByDep() {
           </div>
         </DialogTitle>
         <DialogContent>
-          <Box sx={{ width: 500, height: 450 }}>
+          <DialogContent>
+            <DataGrid2 result={leaveCountResult} />
+          </DialogContent>
+          {/* <Box sx={{ width: 500, height: 450 }}>
             <PieChart1 />
-          </Box>
+          </Box> */}
         </DialogContent>
       </Dialog>
     </Box>

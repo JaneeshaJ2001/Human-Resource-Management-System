@@ -288,7 +288,7 @@ function Employee() {
             autoHeight
             rowHeight={70}
             components={{ Toolbar: GridToolbar }}
-            onRowClick={(params) => {
+            onRowDoubleClick={(params) => {
               navigate(`/profile/empId/${params.row.emp_id}`);
             }}
           />

@@ -3,21 +3,25 @@ import React, { useContext, useEffect, useState } from "react";
 import Chart from "../../components/chart/Chart";
 import FeaturedInfo from "../../components/featuredInfo/FeaturedInfo";
 import { AuthContext } from "../../helpers/AuthContext";
-import { userData } from "../../data/MockData2";
+// import { userData } from "../../data/MockData2";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Dashboard() {
+  const [userData, setUserData] = useState([]);
+
   const { authState, setAuthState } = useContext(AuthContext);
-  const [employeeDetails, setEmployeeDetails] = useState({});
+  const [employeeLeaveCount, setEmployeeLeaveCount] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!authState.status) {
       navigate("/login");
-    } else {
+    } else if (authState.role_id === "r-002" || authState.role_id === "r-003") {
+      navigate("/profile");
+    } else if (authState.role_id === "r-004") {
       axios
-        .get(`http://localhost:1234/employee/byId/${authState.emp_id}`, {
+        .get("http://localhost:1234/leaveApplication/leaveCount", {
           headers: { accessToken: localStorage.getItem("accessToken") },
         })
         .then((response) => {
@@ -25,7 +29,69 @@ function Dashboard() {
             console.log(response.data.error);
           } else {
             // console.log(response.data);
-            setEmployeeDetails(response.data[0]);
+            setEmployeeLeaveCount(response.data);
+          }
+        });
+      axios
+        .get("http://localhost:1234/leaveApplication/yearlyCount", {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        })
+        .then((response) => {
+          if (response.data.error) {
+            console.log(response.data.error);
+          } else {
+            // console.log(response.data);
+            // setEmployeeLeaveCount(response.data);
+            setUserData([
+              {
+                name: "Jan",
+                "Total Leaves": response.data[0].jan,
+              },
+              {
+                name: "Feb",
+                "Total Leaves": response.data[0].feb,
+              },
+              {
+                name: "March",
+                "Total Leaves": response.data[0].mar,
+              },
+              {
+                name: "April",
+                "Total Leaves": response.data[0].apr,
+              },
+              {
+                name: "May",
+                "Total Leaves": response.data[0].may,
+              },
+              {
+                name: "June",
+                "Total Leaves": response.data[0].jun,
+              },
+              {
+                name: "July",
+                "Total Leaves": response.data[0].jul,
+              },
+              {
+                name: "Aug",
+                "Total Leaves": response.data[0].aug,
+              },
+              {
+                name: "Sep",
+                "Total Leaves": response.data[0].sep,
+              },
+              {
+                name: "Oct",
+                "Total Leaves": response.data[0].oct,
+              },
+              {
+                name: "Nov",
+                "Total Leaves": response.data[0].nov,
+              },
+              {
+                name: "Dec",
+                "Total Leaves": response.data[0].dece,
+              },
+            ]);
           }
         });
     }
@@ -40,7 +106,9 @@ function Dashboard() {
       <Container maxWidth="lg" sx={{ mt: 3 }}>
         <Grid container spacing={0.5}>
           <Grid item xs={12}>
-            <FeaturedInfo />
+            {employeeLeaveCount.length !== 0 && (
+              <FeaturedInfo employeeLeaveCount={employeeLeaveCount} />
+            )}
           </Grid>
 
           <Grid item xs={12}>
@@ -48,7 +116,7 @@ function Dashboard() {
               data={userData}
               title="User Analytics"
               grid
-              dataKey="Active User"
+              dataKey="Total Leaves"
             />
           </Grid>
         </Grid>

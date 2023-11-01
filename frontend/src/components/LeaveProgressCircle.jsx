@@ -25,26 +25,45 @@ export default LeaveProgressCircle;
 import { RadialBar } from "@nivo/radial-bar";
 import React from "react";
 
-const color = "#1c66d5";
+// const color = "#1c66d5";
 
-const Metric = ({ center }) => {
-  return (
-    <text
-      x={center[0]}
-      y={center[1]}
-      textAnchor="middle"
-      dominantBaseline="central"
-      style={{
-        fontSize: 18,
-        fill: color,
-      }}
-    >
-      75%
-    </text>
-  );
-};
+// const Metric = ({ center }) => {
+//   return (
+//     <text
+//       x={center[0]}
+//       y={center[1]}
+//       textAnchor="middle"
+//       dominantBaseline="central"
+//       style={{
+//         fontSize: 18,
+//         fill: color,
+//       }}
+//     >
+//       {}%
+//     </text>
+//   );
+// };
 
-export default function App() {
+export default function App({ progress }) {
+  const color = "#1c66d5";
+
+  const Metric = ({ center }) => {
+    return (
+      <text
+        x={center[0]}
+        y={center[1]}
+        textAnchor="middle"
+        dominantBaseline="central"
+        style={{
+          fontSize: 18,
+          fill: color,
+        }}
+      >
+        {parseInt(progress)}%
+      </text>
+    );
+  };
+
   return (
     <div className="App">
       <RadialBar
@@ -60,7 +79,7 @@ export default function App() {
         data={[
           {
             id: "default",
-            data: [{ x: "percentage", y: 75 }],
+            data: [{ x: "percentage", y: parseInt(progress) }],
           },
         ]}
         layers={["tracks", "bars", Metric]}

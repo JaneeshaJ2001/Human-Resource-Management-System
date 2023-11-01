@@ -75,6 +75,39 @@ router.get("/byId/:emp_id", validateToken, (req, res) => {
   });
 });
 
+router.get("/byJobTitle/:job_title", (req, res) => {
+  const query = "select * from employee_info_view where job_title = ?";
+  db.query(query, [req.params.job_title], (err, data) => {
+    if (err) {
+      res.json({ error: err });
+    } else {
+      res.json(data);
+    }
+  });
+});
+
+router.get("/byPayGrade/:pay_grade", (req, res) => {
+  const query = "select * from employee_info_view where pay_grade = ?";
+  db.query(query, [req.params.pay_grade], (err, data) => {
+    if (err) {
+      res.json({ error: err });
+    } else {
+      res.json(data);
+    }
+  });
+});
+
+router.get("/byDept/:dept_name", (req, res) => {
+  const query = "select * from employee_info_view where dept_name = ?";
+  db.query(query, [req.params.dept_name], (err, data) => {
+    if (err) {
+      res.json({ error: err });
+    } else {
+      res.json(data);
+    }
+  });
+});
+
 router.get("/bySupervisorId/:supervisor_id", validateToken, (req, res) => {
   const query = "select * from employee_info_view where SupervisorId = ?";
   db.query(query, [req.params.supervisor_id], (err, data) => {

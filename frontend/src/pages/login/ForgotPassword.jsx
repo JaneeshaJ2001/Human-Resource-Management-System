@@ -11,7 +11,9 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { AuthContext } from "../../helpers/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const defaultTheme = createTheme();
 
@@ -24,6 +26,15 @@ export default function SignIn() {
       password: data.get("password"),
     });
   };
+
+  const { authState } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!authState.adminAuth) {
+      navigate("/login");
+    }
+  }, [authState]);
 
   return (
     <ThemeProvider theme={defaultTheme}>

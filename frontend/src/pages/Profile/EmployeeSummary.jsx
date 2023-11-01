@@ -100,7 +100,7 @@ function EmployeeSummary() {
   };
 
   useEffect(() => {
-    if (authState.status) {
+    if (authState.status && authState.role_id !== "") {
       setPersonalDetails({ ...authState.personal_details });
       axios
         .get(`http://localhost:1234/emergency/byId/${authState.emp_id}`, {
