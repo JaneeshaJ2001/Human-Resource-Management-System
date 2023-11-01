@@ -99,6 +99,8 @@ function EmployeeSummary() {
     }
   };
 
+  const [customAttributes, setCustomAttributes] = useState([]);
+
   useEffect(() => {
     if (authState.status && authState.role_id !== "") {
       setPersonalDetails({ ...authState.personal_details });
@@ -111,6 +113,20 @@ function EmployeeSummary() {
             console.log(response.data.error);
           } else {
             setEmergencyDetails(response.data[0]);
+          }
+        });
+      axios
+        .get(
+          `http://localhost:1234/customAttribute/byEmpId/${authState.emp_id}`,
+          {
+            headers: { accessToken: localStorage.getItem("accessToken") },
+          }
+        )
+        .then((response) => {
+          if (response.data.error) {
+            console.log(response.data.error);
+          } else {
+            setCustomAttributes(response.data);
           }
         });
     }
@@ -591,6 +607,54 @@ function EmployeeSummary() {
           </DialogContent>
         </Dialog>
       </Grid>
+
+      {customAttributes.length > 0 && (
+        <Grid item xs={12} md={6}>
+          <Paper sx={{ p: 3 }}>
+            <Typography variant="h6" gutterBottom component="div">
+              Extra Details
+            </Typography>
+            <Grid container spacing={2}>
+              {customAttributes.map((customAttribute) => {
+                return (
+                  <Grid item xs={12} md={6}>
+                    <FormControl
+                      disabled
+                      variant="standard"
+                      style={{ width: "100%" }}
+                    >
+                      <InputLabel htmlFor="component-disabled">
+                        {customAttribute.attribute_name}
+                      </InputLabel>
+                      <Input
+                        id="component-disabled"
+                        value={customAttribute.attribute_value}
+                        defaultValue={" "}
+                      />
+                    </FormControl>
+                  </Grid>
+                );
+              })}
+              {/* <Grid item xs={12} md={6}>
+              <FormControl
+                disabled
+                variant="standard"
+                style={{ width: "100%" }}
+              >
+                <InputLabel htmlFor="component-disabled">
+                  Employee ID
+                </InputLabel>
+                <Input
+                  id="component-disabled"
+                  value={personalDetails.emp_id}
+                  defaultValue={" "}
+                />
+              </FormControl>
+            </Grid> */}
+            </Grid>
+          </Paper>
+        </Grid>
+      )}
     </Grid>
   );
 }

@@ -14,6 +14,7 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
+  Checkbox,
 } from "@mui/material";
 
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -76,6 +77,29 @@ const RegisterForm = () => {
           alert("Some error , try again!");
         } else {
           console.log(response.data);
+
+          customAttributes.map((customAttribute) => {
+            if (customAttribute.attribute_status) {
+              axios
+                .post(
+                  "http://localhost:1234/customAttribute",
+                  { ...customAttribute, emp_id: response.data.emp_id },
+                  {
+                    headers: {
+                      accessToken: localStorage.getItem("accessToken"),
+                    },
+                  }
+                )
+                .then((res) => {
+                  if (res.data.error) {
+                    console.log(res.data.error);
+                  } else {
+                    console.log(res.data);
+                  }
+                });
+            }
+          });
+
           alert(`Employee Added, emp_id = ${response.data.emp_id}`);
           window.location.reload();
         }
@@ -100,6 +124,8 @@ const RegisterForm = () => {
       marital_status: "",
     });
   };
+
+  const [customAttributes, setCustomAttributes] = useState([]);
 
   useEffect(() => {
     if (authState.status) {
@@ -169,8 +195,32 @@ const RegisterForm = () => {
             setSupervisors(response.data);
           }
         });
+      axios
+        .get("http://localhost:1234/customAttribute", {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        })
+        .then((response) => {
+          if (response.data.error) {
+            console.log(response.data.error);
+          } else {
+            console.log(response.data);
+            setCustomAttributes(
+              response.data.map((row) => {
+                return {
+                  attribute_id: row.attribute_id,
+                  attribute_name: row.attribute_name,
+                  attribute_description: row.description,
+                  attribute_value: "",
+                  attribute_status: false,
+                };
+              })
+            );
+          }
+        });
     }
   }, [authState]);
+
+  // console.log(customAttributes)*
 
   return (
     <React.Fragment>
@@ -364,6 +414,60 @@ const RegisterForm = () => {
                 value={data.street_name}
                 onChange={handleChange}
               />
+
+              {customAttributes.map((attribute) => {
+                return (
+                  <div>
+                    <Checkbox
+                      checked={attribute.attribute_status}
+                      id={attribute.attribute_id}
+                      onChange={(e) => {
+                        setCustomAttributes(
+                          customAttributes.map((customAttribute) => {
+                            if (customAttribute.attribute_id === e.target.id) {
+                              return {
+                                ...customAttribute,
+                                attribute_status:
+                                  !customAttribute.attribute_status,
+                              };
+                            } else {
+                              return {
+                                ...customAttribute,
+                              };
+                            }
+                          })
+                        );
+                      }}
+                    />
+                    <TextField
+                      disabled={!attribute.attribute_status}
+                      required={attribute.attribute_status}
+                      id={attribute.attribute_id}
+                      name={attribute.attribute_name}
+                      label={attribute.attribute_name}
+                      fullWidth
+                      variant="standard"
+                      value={attribute.attribute_value}
+                      onChange={(e) => {
+                        setCustomAttributes(
+                          customAttributes.map((customAttribute) => {
+                            if (customAttribute.attribute_id === e.target.id) {
+                              return {
+                                ...customAttribute,
+                                attribute_value: e.target.value,
+                              };
+                            } else {
+                              return {
+                                ...customAttribute,
+                              };
+                            }
+                          })
+                        );
+                      }}
+                    />
+                  </div>
+                );
+              })}
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
