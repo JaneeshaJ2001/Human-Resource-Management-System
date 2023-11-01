@@ -88,7 +88,6 @@ function EmployeeByPayGrade() {
             type="submit"
             variant="contained"
             endIcon={<SendOutlinedIcon />}
-            // onClick={() => setOpenPopupEmployeeByPayGrade(true)}
           >
             Submit
           </Button>

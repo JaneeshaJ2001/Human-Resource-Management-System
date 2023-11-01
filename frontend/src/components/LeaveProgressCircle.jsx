@@ -64,7 +64,6 @@ export default function App({ progress }) {
     );
   };
 
-  
   return (
     <div className="App">
       <RadialBar

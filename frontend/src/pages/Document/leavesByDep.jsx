@@ -144,7 +144,6 @@ function LeavesByDep() {
             type="submit"
             variant="contained"
             endIcon={<SendOutlinedIcon />}
-            // onClick={() => setOpenPopupTotalLeaveGroupedByDep(true)}
           >
             Submit
           </Button>
