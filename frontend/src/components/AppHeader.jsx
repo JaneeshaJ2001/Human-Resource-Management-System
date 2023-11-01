@@ -1,6 +1,5 @@
 import { AppBar, Badge, Box, IconButton, Toolbar } from "@mui/material";
 import MenuTwoToneIcon from "@mui/icons-material/MenuTwoTone";
-import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -50,10 +49,6 @@ function AppHeader() {
         <Box component="img" sx={styles.appLogo} src="/src/assets/logo.png" />
 
         <Box sx={{ flexGrow: 1 }} />
-
-        <IconButton title="AdminPanel" color="secondary">
-          <AdminPanelSettingsIcon />
-        </IconButton>
 
         <IconButton title="Notifications" color="secondary">
           <Badge badgeContent={14} color="error">

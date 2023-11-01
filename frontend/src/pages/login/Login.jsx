@@ -134,14 +134,46 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="/signup" variant="body2">
+                <Link
+                  component="button"
+                  variant="body2"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (prompt("Enter admin password") === "0000") {
+                      setAuthState({ ...authState, adminAuth: true });
+                      navigate("/signup");
+                    } else {
+                      alert("Invalid admin auth");
+                      navigate("/login");
+                    }
+                  }}
+                >
                   Create Account !
                 </Link>
+                {/* <Link href="/signup" variant="body2">
+                  Create Account !
+                </Link> */}
               </Grid>
               <Grid item xs>
-                <Link href="/forgotpassword" variant="body2">
+                <Link
+                  component="button"
+                  variant="body2"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (prompt("Enter admin password") === "0000") {
+                      setAuthState({ ...authState, adminAuth: true });
+                      navigate("/forgotpassword");
+                    } else {
+                      alert("Invalid admin auth");
+                      navigate("/login");
+                    }
+                  }}
+                >
                   Forgot password?
                 </Link>
+                {/* <Link href="/forgotpassword" variant="body2">
+                  Forgot password?
+                </Link> */}
               </Grid>
             </Grid>
           </Box>

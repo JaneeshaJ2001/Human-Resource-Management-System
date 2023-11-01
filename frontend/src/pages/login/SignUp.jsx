@@ -15,15 +15,15 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../helpers/AuthContext";
 
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [userDetails, setUserDetails] = useState({
     emp_id: "",
@@ -52,7 +52,7 @@ export default function SignUp() {
             console.log(response.data.error);
             if (response.data.error.code === "ER_DUP_ENTRY") {
               alert("User already exists, Login instead !");
-              navigate("/login")
+              navigate("/login");
             } else {
               alert("Fill all the forms correctly");
             }
@@ -61,11 +61,19 @@ export default function SignUp() {
             alert(
               `User registered successfully, Username : ${response.data.username}`
             );
-            navigate("/login")
+            navigate("/login");
           }
         });
     }
   };
+
+  const { authState } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!authState.adminAuth) {
+      navigate("/login");
+    }
+  }, [authState]);
 
   return (
     <ThemeProvider theme={defaultTheme}>

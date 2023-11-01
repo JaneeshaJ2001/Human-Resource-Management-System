@@ -26,6 +26,7 @@
     "@nivo/core": "^0.83.0",
     "@nivo/line": "^0.83.0",
     "@nivo/pie": "^0.83.0",
+    "@nivo/radial-bar": "^0.83.0",
     "axios": "^1.5.1",
     "dayjs": "^1.11.10",
     "formik": "^2.4.5",

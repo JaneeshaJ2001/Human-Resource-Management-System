@@ -147,7 +147,7 @@ function Leave() {
             autoHeight
             rowHeight={70}
             components={{ Toolbar: GridToolbar }}
-            onRowClick={(params) => {
+            onRowDoubleClick={(params) => {
               if (params.row.req_status == "Pending") {
                 setDeleteLeave({
                   status: true,

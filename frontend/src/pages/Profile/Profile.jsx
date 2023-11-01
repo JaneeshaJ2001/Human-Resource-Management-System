@@ -282,7 +282,7 @@ function Profile() {
   useEffect(() => {
     if (!authState.status) {
       navigate("/login");
-    } else {
+    } else if (authState.role_id !== "") {
       axios
         .get(`http://localhost:1234/dependent/byId/${authState.emp_id}`, {
           headers: { accessToken: localStorage.getItem("accessToken") },

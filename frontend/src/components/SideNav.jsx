@@ -27,7 +27,7 @@ function SideNav() {
   if (
     location.pathname === "/login" ||
     location.pathname === "/signup" ||
-    location.pathname === "/forgotpassword" 
+    location.pathname === "/forgotpassword"
   ) {
     return null;
   }
@@ -50,7 +50,6 @@ function SideNav() {
           alt="Profile name"
           src="/src/assets/user.png"
           // src="../src/assets/user.png"
-
         />
         {!collapsed ? (
           <Typography variant="body2" sx={styles.profileName}>
@@ -83,13 +82,15 @@ function SideNav() {
           },
         }}
       >
-        <MenuItem
-          active={location.pathname === "/"}
-          component={<Link to="/" />}
-          icon={<DashboardCustomizeOutlined />}
-        >
-          <Typography variant="body2"> Dashboard </Typography>
-        </MenuItem>
+        {authState.role_id === "r-004" && (
+          <MenuItem
+            active={location.pathname === "/"}
+            component={<Link to="/" />}
+            icon={<DashboardCustomizeOutlined />}
+          >
+            <Typography variant="body2"> Dashboard </Typography>
+          </MenuItem>
+        )}
 
         <MenuItem
           active={location.pathname === "/profile"}
@@ -134,13 +135,15 @@ function SideNav() {
           </MenuItem>
         )}
 
-        <MenuItem
-          active={location.pathname === "/document"}
-          component={<Link to="/document" />}
-          icon={<DescriptionOutlined />}
-        >
-          <Typography variant="body2"> Documents </Typography>
-        </MenuItem>
+        {authState.role_id === "r-002" && (
+          <MenuItem
+            active={location.pathname === "/document"}
+            component={<Link to="/document" />}
+            icon={<DescriptionOutlined />}
+          >
+            <Typography variant="body2"> Documents </Typography>
+          </MenuItem>
+        )}
       </Menu>
     </Sidebar>
   );
