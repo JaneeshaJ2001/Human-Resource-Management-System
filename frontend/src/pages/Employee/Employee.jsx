@@ -531,23 +531,25 @@ function Employee() {
           >
             Add Custom Attribute
           </Button>
-          <DataGrid
-            rows={customAttributes}
-            getRowId={(row) => row.attribute_id}
-            columns={columnsForCustomAttributes}
-            PageSize={25}
-            rowsPerPageOption={[25]}
-            autoHeight
-            rowHeight={70}
-            onRowDoubleClick={(params) => {
-              setUpdateAttribute({
-                status: true,
-                attribute_id: params.row.attribute_id,
-                attribute_name: params.row.attribute_name,
-                description: params.row.description,
-              });
-            }}
-          />
+          <Paper>
+            <DataGrid
+              rows={customAttributes}
+              getRowId={(row) => row.attribute_id}
+              columns={columnsForCustomAttributes}
+              PageSize={25}
+              rowsPerPageOption={[25]}
+              autoHeight
+              rowHeight={70}
+              onRowDoubleClick={(params) => {
+                setUpdateAttribute({
+                  status: true,
+                  attribute_id: params.row.attribute_id,
+                  attribute_name: params.row.attribute_name,
+                  description: params.row.description,
+                });
+              }}
+            />
+          </Paper>
           <Dialog open={addAttribute.status} maxWidth="xl">
             <DialogTitle>
               <div style={{ display: "flex", alignContent: "space-between" }}>

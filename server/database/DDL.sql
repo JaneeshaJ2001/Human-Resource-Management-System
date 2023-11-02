@@ -952,10 +952,10 @@ end $$
 DELIMITER ;
 
 
-DROP TRIGGER IF EXISTS address_delete_after_branch_delete
+DROP TRIGGER IF EXISTS address_delete_after_branch_delete;
 DELIMITER $$
 create trigger address_delete_after_branch_delete
-after delete on Branches
+after delete on branches
 for each row
 
 begin
@@ -965,10 +965,10 @@ end $$
 DELIMITER ;
 
 
-DROP TRIGGER IF EXISTS address_delete_after_emergency_delete
+DROP TRIGGER IF EXISTS address_delete_after_emergency_delete;
 DELIMITER $$
 create trigger address_delete_after_emergency_delete
-after delete on Emergency_details
+after delete on emergency_details
 for each row
 
 begin
@@ -978,7 +978,7 @@ end $$
 DELIMITER ;
 
 
-DROP TRIGGER IF EXISTS address_delete_after_dependent_delete
+DROP TRIGGER IF EXISTS address_delete_after_dependent_delete;
 DELIMITER $$
 create trigger address_delete_after_dependent_delete
 after delete on dependent
@@ -1631,7 +1631,7 @@ drop view if exists leave_app_set;
 create view leave_app_set as
 select 
 leave_application.req_id,leave_application.leave_type_id,leave_type_names.leave_type_name,leave_application.reason,
-leave_application.start_date,leave_application.end_date, datediff(leave_application.end_date,leave_application.start_date) as no_of_days ,leave_application.supervisor_id,
+leave_application.start_date,leave_application.end_date, datediff(least(leave_application.end_date,concat(year(curdate()),'-12-31')),greatest(leave_application.start_date,concat(year(curdate()),'-01-01'))) + 1 as no_of_days ,leave_application.supervisor_id,
 leave_application.req_status, leave_application.emp_id, role.pay_grade, number_of_leaves.default_days, leave_application.created_at, leave_application.updated_at
 from leave_application left join employee on (leave_application.emp_id = employee.emp_id) left join role on (employee.job_id = role.job_id) left join number_of_leaves on (leave_application.leave_type_id = number_of_leaves.leave_type_id
  and role.pay_grade = number_of_leaves.pay_grade) left join leave_type_names on (leave_application.leave_type_id = leave_type_names.leave_type_id);
@@ -1647,6 +1647,7 @@ create view leave_count_per_employee_view as
 select
 employee.emp_id, number_of_leaves.leave_type_id, leave_type_names.leave_type_name, 
 ifnull(leave_count_set.total_no_of_leaves_taken,0) as total_no_of_leaves_taken, number_of_leaves.default_days as total_no_of_permitted_days,
+(number_of_leaves.default_days - ifnull(leave_count_set.total_no_of_leaves_taken,0)) as no_of_pending_leaves,
 (ifnull(leave_count_set.total_no_of_leaves_taken,0)/number_of_leaves.default_days)*100 as percentage_leaves_taken
 from employee left join role on (employee.job_id = role.job_id) 
 join number_of_leaves on (role.pay_grade = number_of_leaves.pay_grade) 
@@ -1675,18 +1676,18 @@ from
 (select 
 req_id,
 start_date, end_date,
-greatest(datediff(least(end_date,concat(year(curdate()),'-01-31')),greatest(start_date,concat(year(curdate()),'-01-01'))),0) as jan,
-greatest(datediff(least(end_date,concat(year(curdate()),'-02-28')),greatest(start_date,concat(year(curdate()),'-02-01'))),0) as feb,
-greatest(datediff(least(end_date,concat(year(curdate()),'-03-31')),greatest(start_date,concat(year(curdate()),'-03-01'))),0) as mar,
-greatest(datediff(least(end_date,concat(year(curdate()),'-04-30')),greatest(start_date,concat(year(curdate()),'-04-01'))),0) as apr,
-greatest(datediff(least(end_date,concat(year(curdate()),'-05-31')),greatest(start_date,concat(year(curdate()),'-05-01'))),0) as may,
-greatest(datediff(least(end_date,concat(year(curdate()),'-06-30')),greatest(start_date,concat(year(curdate()),'-06-01'))),0) as jun,
-greatest(datediff(least(end_date,concat(year(curdate()),'-07-31')),greatest(start_date,concat(year(curdate()),'-07-01'))),0) as jul,
-greatest(datediff(least(end_date,concat(year(curdate()),'-08-31')),greatest(start_date,concat(year(curdate()),'-08-01'))),0) as aug,
-greatest(datediff(least(end_date,concat(year(curdate()),'-09-30')),greatest(start_date,concat(year(curdate()),'-09-01'))),0) as sep,
-greatest(datediff(least(end_date,concat(year(curdate()),'-10-31')),greatest(start_date,concat(year(curdate()),'-10-01'))),0) as oct,
-greatest(datediff(least(end_date,concat(year(curdate()),'-11-30')),greatest(start_date,concat(year(curdate()),'-11-01'))),0) as nov,
-greatest(datediff(least(end_date,concat(year(curdate()),'-12-31')),greatest(start_date,concat(year(curdate()),'-12-01'))),0) as dece,
+greatest(datediff(least(end_date,concat(year(curdate()),'-01-31')),greatest(start_date,concat(year(curdate()),'-01-01')))+1,0) as jan,
+greatest(datediff(least(end_date,concat(year(curdate()),'-02-28')),greatest(start_date,concat(year(curdate()),'-02-01')))+1,0) as feb,
+greatest(datediff(least(end_date,concat(year(curdate()),'-03-31')),greatest(start_date,concat(year(curdate()),'-03-01')))+1,0) as mar,
+greatest(datediff(least(end_date,concat(year(curdate()),'-04-30')),greatest(start_date,concat(year(curdate()),'-04-01')))+1,0) as apr,
+greatest(datediff(least(end_date,concat(year(curdate()),'-05-31')),greatest(start_date,concat(year(curdate()),'-05-01')))+1,0) as may,
+greatest(datediff(least(end_date,concat(year(curdate()),'-06-30')),greatest(start_date,concat(year(curdate()),'-06-01')))+1,0) as jun,
+greatest(datediff(least(end_date,concat(year(curdate()),'-07-31')),greatest(start_date,concat(year(curdate()),'-07-01')))+1,0) as jul,
+greatest(datediff(least(end_date,concat(year(curdate()),'-08-31')),greatest(start_date,concat(year(curdate()),'-08-01')))+1,0) as aug,
+greatest(datediff(least(end_date,concat(year(curdate()),'-09-30')),greatest(start_date,concat(year(curdate()),'-09-01')))+1,0) as sep,
+greatest(datediff(least(end_date,concat(year(curdate()),'-10-31')),greatest(start_date,concat(year(curdate()),'-10-01')))+1,0) as oct,
+greatest(datediff(least(end_date,concat(year(curdate()),'-11-30')),greatest(start_date,concat(year(curdate()),'-11-01')))+1,0) as nov,
+greatest(datediff(least(end_date,concat(year(curdate()),'-12-31')),greatest(start_date,concat(year(curdate()),'-12-01')))+1,0) as dece,
 req_status,
 emp_id
 from leave_application_view where req_status = "Accepted") as s

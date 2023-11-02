@@ -3,6 +3,7 @@ import {
   Button,
   Dialog,
   DialogContent,
+  Paper,
   DialogTitle,
   FormControl,
   Grid,
@@ -338,22 +339,24 @@ function Profile() {
           >
             Add Contact
           </Button>
-          <DataGrid
-            rows={contacts}
-            getRowId={(row) => row.contact_number}
-            columns={columnsForContacts}
-            PageSize={25}
-            rowsPerPageOption={[25]}
-            autoHeight
-            rowHeight={70}
-            onRowDoubleClick={(params) => {
-              setUpdateContact({
-                status: true,
-                old_number: params.row.contact_number,
-                new_number: "",
-              });
-            }}
-          />
+          <Paper>
+            <DataGrid
+              rows={contacts}
+              getRowId={(row) => row.contact_number}
+              columns={columnsForContacts}
+              PageSize={25}
+              rowsPerPageOption={[25]}
+              autoHeight
+              rowHeight={70}
+              onRowDoubleClick={(params) => {
+                setUpdateContact({
+                  status: true,
+                  old_number: params.row.contact_number,
+                  new_number: "",
+                });
+              }}
+            />
+          </Paper>
           <Dialog open={openPopupAddContact} maxWidth="xl">
             <DialogTitle>
               <div style={{ display: "flex", alignContent: "space-between" }}>
@@ -497,30 +500,32 @@ function Profile() {
           >
             Add Dependent
           </Button>
-          <DataGrid
-            rows={dependents}
-            getRowId={(row) => row.dependent_id}
-            columns={columnsForDependents}
-            PageSize={25}
-            rowsPerPageOption={[25]}
-            autoHeight
-            rowHeight={70}
-            onRowDoubleClick={(params) => {
-              setUpdateDependent({
-                status: true,
-                dependent_id: params.row.dependent_id,
-                name: params.row.name,
-                birth_date: moment(params.row.b_date).format("YYYY-MM-DD"),
-                gender: params.row.gender,
-                relationship: params.row.relationship,
-                PB_number: params.row.PB_number,
-                street_name: params.row.street_name,
-                city_name: params.row.city_name,
-                country: params.row.country,
-              });
-              // console.log(params);
-            }}
-          />
+          <Paper>
+            <DataGrid
+              rows={dependents}
+              getRowId={(row) => row.dependent_id}
+              columns={columnsForDependents}
+              PageSize={25}
+              rowsPerPageOption={[25]}
+              autoHeight
+              rowHeight={70}
+              onRowDoubleClick={(params) => {
+                setUpdateDependent({
+                  status: true,
+                  dependent_id: params.row.dependent_id,
+                  name: params.row.name,
+                  birth_date: moment(params.row.b_date).format("YYYY-MM-DD"),
+                  gender: params.row.gender,
+                  relationship: params.row.relationship,
+                  PB_number: params.row.PB_number,
+                  street_name: params.row.street_name,
+                  city_name: params.row.city_name,
+                  country: params.row.country,
+                });
+                // console.log(params);
+              }}
+            />
+          </Paper>
           <Dialog open={openPopupAddDependent} maxWidth="xl">
             <DialogTitle>
               <div style={{ display: "flex", alignContent: "space-between" }}>

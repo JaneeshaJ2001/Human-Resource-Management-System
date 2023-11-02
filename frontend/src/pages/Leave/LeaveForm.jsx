@@ -27,6 +27,8 @@ function LeaveForm() {
     end_date: today,
   });
 
+  const [dateRange, setDateRange] = useState(0);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     // console.log(leaveDetails);
@@ -52,6 +54,54 @@ function LeaveForm() {
     });
   };
 
+  const handleChangeDate = (event) => {
+    if (event.target.name === "start_date") {
+      const start = new Date(event.target.value);
+      const end = new Date(leaveDetails.end_date);
+      if (start > end) {
+        setLeaveDetails({
+          ...leaveDetails,
+          start_date: event.target.value,
+          end_date: event.target.value,
+        });
+        setDateRange(0);
+      } else {
+        setLeaveDetails({
+          ...leaveDetails,
+          start_date: event.target.value,
+        });
+        const timeDifference = Math.abs(end - start);
+        const daysRemaining =
+          Math.ceil(timeDifference / (1000 * 60 * 60 * 24)) + 1;
+        // console.log(daysRemaining);
+        setDateRange(daysRemaining);
+      }
+    } else if (event.target.name === "end_date") {
+      const start = new Date(leaveDetails.start_date);
+      const end = new Date(event.target.value);
+      if (end < start) {
+        setLeaveDetails({
+          ...leaveDetails,
+          end_date: leaveDetails.start_date,
+        });
+        setDateRange(0);
+      } else {
+        setLeaveDetails({
+          ...leaveDetails,
+          end_date: event.target.value,
+        });
+        const timeDifference = Math.abs(end - start);
+        const daysRemaining =
+          Math.ceil(timeDifference / (1000 * 60 * 60 * 24)) + 1;
+        // console.log(daysRemaining);
+        setDateRange(daysRemaining);
+      }
+    }
+  };
+
+  // console.log(dateRange);
+  // console.log(leaveDetails);
+
   const handleReset = () => {
     setLeaveDetails({
       leave_type_name: "",
@@ -60,6 +110,25 @@ function LeaveForm() {
       end_date: today,
     });
   };
+
+  const [employeeLeaveCount, setEmployeeLeaveCount] = useState([]);
+
+  React.useEffect(() => {
+    axios
+      .get("http://localhost:1234/leaveApplication/leaveCount", {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        if (response.data.error) {
+          console.log(response.data.error);
+        } else {
+          // console.log(response.data);
+          setEmployeeLeaveCount(response.data);
+        }
+      });
+  }, []);
+
+  // console.log(employeeLeaveCount)
 
   return (
     <Paper sx={{ p: 3 }}>
@@ -71,7 +140,7 @@ function LeaveForm() {
             color="secondary"
             label="Start Date"
             name="start_date"
-            onChange={handleChange}
+            onChange={handleChangeDate}
             value={leaveDetails.start_date}
             required
             fullWidth
@@ -83,7 +152,7 @@ function LeaveForm() {
             color="secondary"
             label="End Date"
             name="end_date"
-            onChange={handleChange}
+            onChange={handleChangeDate}
             value={leaveDetails.end_date}
             required
             fullWidth
@@ -101,10 +170,22 @@ function LeaveForm() {
             label="Select Leave Type"
             onChange={handleChange}
           >
-            <MenuItem value={"Casual"}>Casual</MenuItem>
+            {employeeLeaveCount.map((leaveType) => {
+              if (
+                parseInt(leaveType.no_of_pending_leaves) > 0 &&
+                parseInt(leaveType.no_of_pending_leaves) > dateRange
+              ) {
+                return (
+                  <MenuItem value={leaveType.leave_type_name}>
+                    {leaveType.leave_type_name}
+                  </MenuItem>
+                );
+              }
+            })}
+            {/* <MenuItem value={"Casual"}>Casual</MenuItem>
             <MenuItem value={"Maternity"}>Maternity</MenuItem>
             <MenuItem value={"No-Pay"}>No-Pay</MenuItem>
-            <MenuItem value={"Annual"}>Annual</MenuItem>
+            <MenuItem value={"Annual"}>Annual</MenuItem> */}
           </Select>
         </FormControl>
 
