@@ -23,7 +23,7 @@ router.post("/", validateToken, (req, res) => {
 });
 
 router.get("/byId/:emp_id", validateToken, (req, res) => {
-  const query = "select * from leave_application_view where emp_id = ?";
+  const query = "select * from leave_application_view where emp_id = ? order by created_at desc";
   db.query(query, [req.params.emp_id], (err, data) => {
     if (err) {
       res.json({ error: err });
@@ -34,7 +34,7 @@ router.get("/byId/:emp_id", validateToken, (req, res) => {
 });
 
 router.get("/bySupervisorId/:supervisor_id", validateToken, (req, res) => {
-  const query = "select * from leave_application_view where supervisor_id = ?";
+  const query = "select * from leave_application_view where supervisor_id = ? order by req_status desc, created_at desc ";
   db.query(query, [req.params.supervisor_id], (err, data) => {
     if (err) {
       res.json({ error: err });

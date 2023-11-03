@@ -114,7 +114,7 @@ function Dashboard() {
           <Grid item xs={12}>
             <Chart
               data={userData}
-              title="User Analytics"
+              title="Employee Analytics"
               grid
               dataKey="Total Leaves"
             />

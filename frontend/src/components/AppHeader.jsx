@@ -50,15 +50,15 @@ function AppHeader() {
 
         <Box sx={{ flexGrow: 1 }} />
 
-        <IconButton title="Notifications" color="secondary">
+        {/* <IconButton title="Notifications" color="secondary">
           <Badge badgeContent={14} color="error">
             <NotificationsIcon />
           </Badge>
-        </IconButton>
+        </IconButton> */}
 
-        <IconButton title="Settings" color="secondary">
+        {/* <IconButton title="Settings" color="secondary">
           <SettingsIcon />
-        </IconButton>
+        </IconButton> */}
 
         <IconButton title="Sign Out" color="secondary" onClick={LogOut}>
           <LogoutIcon />

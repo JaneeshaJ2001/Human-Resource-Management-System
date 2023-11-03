@@ -54,4 +54,17 @@ router.delete("/", validateToken, (req, res) => {
   });
 });
 
+router.put("/update", validateToken, (req, res) => {
+  const { dept_id, dept_name, max_no_of_employees } = req.body;
+  const query =
+    "update department set dept_name = ? , no_of_employees = ? where dept_id = ?";
+  db.query(query, [dept_name, max_no_of_employees, dept_id], (err, data) => {
+    if (err) {
+      res.json({ error: err });
+    } else {
+      res.json({ success: "department updated successfully" });
+    }
+  });
+});
+
 module.exports = router;

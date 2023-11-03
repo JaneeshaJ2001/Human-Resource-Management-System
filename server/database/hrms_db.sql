@@ -45,7 +45,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES ('admin','$2b$10$5KeDVxgQq/gVznAJ50VgXO14Ssg.khH4ryRyJcEGgTPkwEY0b7eQa',NULL,'r-001','2023-10-27 18:49:39','2023-10-27 18:48:37'),('u-001','$2b$10$jPPYDEvwf43IeaSPg9fXk.wLuTdGT1t1q9LDM.Y.GYMLGQaNTEb3m','e-001','r-002','2023-10-27 18:55:07','2023-10-27 18:55:07'),('u-002','$2b$10$xFKfM6Cl2h93JFvzt4Uac.geBjLWScZAeOVmQ3lcLvf3ZgxGpYE7u','e-002','r-003','2023-10-27 21:22:34','2023-10-27 21:22:34'),('u-003','$2b$10$EaggrS580FdaWf7f79QUCOrCzbGgmD9xW4JBOGEiPZjVD6rS5xARW','e-003','r-004','2023-10-27 21:24:40','2023-10-27 21:24:40'),('u-004','$2b$10$HmjigEJaG3LSj77WbNi2fuDR1Poy9SKKW0QrNXMRSpAEORiK.tMne','e-004','r-004','2023-10-30 06:47:40','2023-10-30 06:47:40'),('u-005','$2b$10$Ed29xFKP9FDtHUFmUUMituqVhgtC.QiWmEaSgm3kaJRWT.IOGQUKS','e-005','r-003','2023-10-30 06:53:41','2023-10-30 06:53:41'),('u-006','$2b$10$4ejdy983AQ7FWMtiA8DOIOd2GMy8t6ri4Cqri1VbJSWSDIIgYSwm6','e-007','r-003','2023-10-30 12:42:25','2023-10-30 12:42:25'),('u-007','$2b$10$4feCvqzOEGGVnlcGG/i0A.QMcbos6yZjFFW47qV4DEeWM/WMfOq7u','e-006','r-004','2023-10-30 14:27:36','2023-10-30 14:27:36'),('u-008','$2b$10$tSoTwPaQeKdEQcHF0aXYFOkz/UfROb5bsms5N..xGMf6gKV7GVC.y','e-010','r-004','2023-11-01 14:18:17','2023-11-01 14:18:17');
+INSERT INTO `account` VALUES ('admin','$2b$10$5KeDVxgQq/gVznAJ50VgXO14Ssg.khH4ryRyJcEGgTPkwEY0b7eQa',NULL,'r-001','2023-10-27 18:49:39','2023-10-27 18:48:37'),('u-001','$2b$10$jPPYDEvwf43IeaSPg9fXk.wLuTdGT1t1q9LDM.Y.GYMLGQaNTEb3m','e-001','r-002','2023-10-27 18:55:07','2023-10-27 18:55:07'),('u-002','$2b$10$dNmDkow0UNrNjjBqBD1T7OVhzT78CUlhB.lkBRCejEMFxcoNMBlnS','e-002','r-003','2023-11-02 20:51:14','2023-11-02 20:51:14'),('u-003','$2b$10$dd26C4uA3x/sdFNrRY3ysebgrqqEbSlSr66vbZ.PuruhByQ5rgQ9e','e-003','r-004','2023-11-02 20:54:22','2023-11-02 20:54:22'),('u-004','$2b$10$ls6fKO.yPVkqXDdY3T.4WeijktcutnvvEl2T38oJvoqeeScdtPRFi','e-004','r-004','2023-11-02 21:00:43','2023-11-02 21:00:43');
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -132,7 +132,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` VALUES ('ad-001','24/26','deniyaya','matara','srilanka','2023-10-27 18:42:50','2023-10-27 18:42:50'),('ad-002','24/27','Nikanjia','daka','bangladesh','2023-10-27 18:42:50','2023-10-27 18:42:50'),('ad-003','24/28','karachchi','islamabad','pakistan','2023-10-27 18:42:50','2023-10-27 18:42:50'),('ad-004','25/1A','bundings ln','batticaloa','srilanka','2023-10-27 18:52:20','2023-10-27 18:52:20'),('ad-005','25/2','pansala rd','batticaloa','srilanka','2023-10-27 20:55:28','2023-10-27 20:55:28'),('ad-006','25/2','pansala rd','batticaloa','srilanka','2023-10-27 21:20:27','2023-10-27 21:20:27'),('ad-007','25/1A','bundings ln','batticaloa','srilanka','2023-10-27 21:22:07','2023-10-27 21:22:07'),('ad-008','25/1A','bundings ln','batticaloa','srilanka','2023-10-27 21:24:32','2023-10-27 21:24:32'),('ad-009','49','Raja Mawatha','batticaloa','srilanka','2023-10-30 14:13:39','2023-10-29 10:39:07'),('ad-010','49','pansala rd','batticaloa','srilanka','2023-10-29 11:06:22','2023-10-29 11:06:22'),('ad-011','25/1A','Buntings ln','Batticaloa','Sri Lanka','2023-10-29 20:52:36','2023-10-29 20:52:36'),('ad-012','25/1A','Storner\'s ln','moratuwa','Sri Lanka','2023-10-30 03:13:50','2023-10-30 03:13:50'),('ad-013','30','Mill rd','Moratuwa','Sri Lanka','2023-10-30 04:34:25','2023-10-30 04:34:10'),('ad-014','30','main rd','ratmalana','Sri Lanka','2023-10-30 05:57:52','2023-10-30 05:57:52'),('ad-015','25/1A','25/1A','Batticaloa','Sri Lanka','2023-10-30 08:37:10','2023-10-30 08:37:10'),('ad-016','25/1A','main','Batticaloa','Sri Lanka','2023-10-30 08:44:08','2023-10-30 08:44:08'),('ad-018','ad','Raja Mawatha','Colombo','Sri Lanka','2023-10-30 12:37:07','2023-10-30 12:37:07'),('ad-019','12','25/1A','Batticaloa','Sri Lanka','2023-10-30 12:43:35','2023-10-30 12:43:35'),('ad-020','12','Raja Mawatha','ratmalana','Sri Lanka','2023-10-30 14:17:21','2023-10-30 14:17:21'),('ad-021','25/1A','Storner\'s ln','Batticaloa','Sri Lanka','2023-11-01 10:09:49','2023-11-01 10:09:49'),('ad-022','12','molpe road','moratuwa','Sri Lanka','2023-11-01 14:17:27','2023-11-01 14:17:27'),('ad-023','12','street','batto','Sri Lanka','2023-11-01 14:19:47','2023-11-01 14:19:47');
+INSERT INTO `address` VALUES ('ad-001','24/26','deniyaya','matara','srilanka','2023-10-27 18:42:50','2023-10-27 18:42:50'),('ad-002','24/27','Nikanjia','daka','bangladesh','2023-10-27 18:42:50','2023-10-27 18:42:50'),('ad-003','24/28','karachchi','islamabad','pakistan','2023-10-27 18:42:50','2023-10-27 18:42:50'),('ad-004','25/1A','bundings ln','batticaloa','srilanka','2023-10-27 18:52:20','2023-10-27 18:52:20'),('ad-005','25/1A','Storner\'s lane','Batticaloa','Sri Lanka','2023-11-02 20:35:52','2023-10-27 20:55:28'),('ad-009','25/1A','Storner\'s lane','Batticaloa','Sri Lanka','2023-11-02 20:24:01','2023-10-29 10:39:07'),('ad-010','12','Main Street','Colombo','Sri Lanka','2023-11-02 20:43:58','2023-11-02 20:43:58'),('ad-011','23','School Road','Kandy','Sri Lanka','2023-11-02 20:47:34','2023-11-02 20:47:34'),('ad-012','95','Mill Road','Katubedda','Moratuwa','2023-11-02 20:49:11','2023-11-02 20:49:11'),('ad-013','12','Main Street','Colombo','Sri Lanka','2023-11-02 20:52:40','2023-11-02 20:52:40'),('ad-014','12','Main Street','Colombo','Sri Lanka','2023-11-02 20:53:49','2023-11-02 20:53:49'),('ad-015','23','School Road','Kandy','Sri Lanka','2023-11-02 20:56:20','2023-11-02 20:56:20'),('ad-016','23','School Road','Kandy','Sri Lanka','2023-11-02 20:57:20','2023-11-02 20:57:20');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -411,7 +411,7 @@ CREATE TABLE `contact` (
 
 LOCK TABLES `contact` WRITE;
 /*!40000 ALTER TABLE `contact` DISABLE KEYS */;
-INSERT INTO `contact` VALUES ('e-001','0766945925','2023-10-29 09:09:28','2023-10-29 09:09:28'),('e-001','0779788442','2023-10-29 20:21:21','2023-10-29 20:21:21'),('e-001','1234567890','2023-10-30 13:28:22','2023-10-30 13:28:09'),('e-002','0123456789','2023-10-29 20:21:55','2023-10-29 20:21:55'),('e-003','0011223344','2023-10-29 20:23:39','2023-10-29 20:23:39'),('e-010','0779788442','2023-11-01 14:20:22','2023-11-01 14:20:22');
+INSERT INTO `contact` VALUES ('e-001','0706945925','2023-11-02 20:24:46','2023-11-02 20:24:46'),('e-001','0766945925','2023-10-29 09:09:28','2023-10-29 09:09:28'),('e-002','0721234567','2023-11-02 20:52:59','2023-11-02 20:52:59'),('e-003','0771233214','2023-11-02 20:56:33','2023-11-02 20:56:33'),('e-004','0713456543','2023-11-02 21:01:41','2023-11-02 21:01:41');
 /*!40000 ALTER TABLE `contact` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -474,7 +474,6 @@ CREATE TABLE `custom_attribute_value` (
 
 LOCK TABLES `custom_attribute_value` WRITE;
 /*!40000 ALTER TABLE `custom_attribute_value` DISABLE KEYS */;
-INSERT INTO `custom_attribute_value` VALUES ('at-001','e-003','indian'),('at-001','e-010','indian'),('at-002','e-003','200116600105'),('at-002','e-010','20011234567'),('at-003','e-010','12345');
 /*!40000 ALTER TABLE `custom_attribute_value` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -499,7 +498,6 @@ CREATE TABLE `custom_attributes` (
 
 LOCK TABLES `custom_attributes` WRITE;
 /*!40000 ALTER TABLE `custom_attributes` DISABLE KEYS */;
-INSERT INTO `custom_attributes` VALUES ('at-001','Nationality','nationality of a person'),('at-002','NIC','national identity number of a person'),('at-003','Driving License','driving license of a person');
 /*!40000 ALTER TABLE `custom_attributes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -549,7 +547,7 @@ CREATE TABLE `department` (
 
 LOCK TABLES `department` WRITE;
 /*!40000 ALTER TABLE `department` DISABLE KEYS */;
-INSERT INTO `department` VALUES ('dep-001','Human Resource',15,'2023-11-01 12:51:00','2023-10-27 18:39:48'),('dep-002','Finance',20,'2023-11-01 12:51:00','2023-10-27 18:39:48'),('dep-003','Software Engineering',100,'2023-10-27 18:39:48','2023-10-27 18:39:48'),('dep-004','Quantity Surveying',30,'2023-10-27 18:39:48','2023-10-27 18:39:48'),('dep-005','Marketing',10,'2023-10-29 17:41:03','2023-10-29 17:41:03'),('dep-006','Cooking',5,'2023-10-29 18:17:08','2023-10-29 18:17:08');
+INSERT INTO `department` VALUES ('dep-001','Human Resource',10,'2023-11-02 23:09:06','2023-10-27 18:39:48'),('dep-002','Finance',3,'2023-11-02 23:11:51','2023-10-27 18:39:48'),('dep-003','Quality Assurance',20,'2023-11-02 23:12:23','2023-10-27 18:39:48'),('dep-004','Quantity Surveying',30,'2023-10-27 18:39:48','2023-10-27 18:39:48'),('dep-005','Marketing',10,'2023-10-29 17:41:03','2023-10-29 17:41:03');
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -661,7 +659,7 @@ CREATE TABLE `dependent` (
 
 LOCK TABLES `dependent` WRITE;
 /*!40000 ALTER TABLE `dependent` DISABLE KEYS */;
-INSERT INTO `dependent` VALUES ('thulajah','2001-06-14','Female','friend','e-001','d-001','ad-005','2023-10-29 11:06:52','2023-10-27 20:55:28'),('abineyan','2001-06-14','Male','friend','e-002','d-002','ad-006','2023-10-29 11:06:52','2023-10-27 21:20:27'),('Aarushi','2016-12-12','Female','Sister','e-003','d-003','ad-011','2023-10-29 20:52:36','2023-10-29 20:52:36'),('damitha','2023-11-01','Male','Brother','e-001','d-004','ad-015','2023-10-30 08:37:10','2023-10-30 08:37:10');
+INSERT INTO `dependent` VALUES ('Aarushi Kugarajah','2001-06-14','Female','Sister','e-001','d-001','ad-005','2023-11-02 20:35:52','2023-10-27 20:55:28'),('Supum Wickramasinghe','2005-11-16','Male','Brother','e-002','d-002','ad-014','2023-11-02 20:53:49','2023-11-02 20:53:49'),('Sandali Jayathilage','1975-06-20','Female','Mother','e-003','d-003','ad-016','2023-11-02 20:57:20','2023-11-02 20:57:20');
 /*!40000 ALTER TABLE `dependent` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -770,7 +768,7 @@ CREATE TABLE `emergency_details` (
 
 LOCK TABLES `emergency_details` WRITE;
 /*!40000 ALTER TABLE `emergency_details` DISABLE KEYS */;
-INSERT INTO `emergency_details` VALUES ('e-001','thulajah','friend','ad-009','0762966289','0112719748','2023-10-30 14:13:39','2023-10-29 10:39:07'),('e-002','abineyan','friend','ad-010','0766945925','0652223745','2023-10-29 11:06:22','2023-10-29 11:06:22'),('e-003','Krishna','Brother','ad-013','0776653899','0651234567','2023-10-30 04:34:25','2023-10-30 04:34:10'),('e-007','Sajeev Kugarajah','hubby','ad-019','0766945925','0766945925','2023-10-30 12:43:35','2023-10-30 12:43:35'),('e-010','Prabaharan','father','ad-023','111111111','22222222','2023-11-01 14:19:47','2023-11-01 14:19:47');
+INSERT INTO `emergency_details` VALUES ('e-001','Kugarajah','Father','ad-009','0776653899','0652223745','2023-11-02 20:24:01','2023-10-29 10:39:07'),('e-002','Wickramasinghe','Father','ad-013','0761212123','0112323234','2023-11-02 20:52:40','2023-11-02 20:52:40'),('e-003','Jayathilage','Father','ad-015','0751234565','0125645345','2023-11-02 20:56:20','2023-11-02 20:56:20');
 /*!40000 ALTER TABLE `emergency_details` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -956,7 +954,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES ('e-001','Sajeev','Kanth','2001-06-14','ad-004','br-001','j-004','dep-001','es-005',NULL,'Single','2023-10-29 17:40:41','2023-10-27 18:52:20'),('e-002','Sajeev','Kumar','2001-06-14','ad-007','br-001','j-017','dep-002','es-005',NULL,'Single','2023-10-27 21:22:07','2023-10-27 21:22:07'),('e-003','Sajeev','Krishna','2001-06-14','ad-008','br-001','j-014','dep-002','es-005','e-002','Single','2023-10-27 21:24:32','2023-10-27 21:24:32'),('e-004','Kheen','Niththi','2023-10-19','ad-012','br-003','j-014','dep-006','es-006','e-001','Single','2023-10-30 06:23:30','2023-10-30 03:13:50'),('e-005','Thulajah','Uthayasunthar','2023-10-01','ad-014','br-001','j-017','dep-001','es-005',NULL,'Single','2023-10-30 05:57:52','2023-10-30 05:57:52'),('e-006','Nipuni','jayathilage','2023-10-09','ad-016','br-003','j-010','dep-006','es-006','e-005','Single','2023-10-30 08:44:08','2023-10-30 08:44:08'),('e-007','Thulaja','Sajeev','2023-10-04','ad-018','br-003','j-017','dep-006','es-005',NULL,'Married','2023-10-30 12:37:07','2023-10-30 12:37:07'),('e-008','Uthaya','Uruthiran','2023-10-02','ad-020','br-002','j-014','dep-004','es-003','e-005','Married','2023-10-30 14:17:21','2023-10-30 14:17:21'),('e-009','damitha','udhesh','2023-11-13','ad-021','br-001','j-010','dep-005','es-002','e-005','Single','2023-11-01 10:09:49','2023-11-01 10:09:49'),('e-010','Shangari','Prabaharan','2023-02-24','ad-022','br-003','j-011','dep-003','es-003','e-005','Married','2023-11-01 14:17:27','2023-11-01 14:17:27');
+INSERT INTO `employee` VALUES ('e-001','Sajeev','Kugarajah','2001-06-14','ad-004','br-001','j-004','dep-001','es-005',NULL,'Single','2023-11-02 20:22:56','2023-10-27 18:52:20'),('e-002','Janeesha','Wickramasinghe','2001-12-05','ad-010','br-001','j-017','dep-002','es-005',NULL,'Single','2023-11-02 20:43:58','2023-11-02 20:43:58'),('e-003','Nipuni','Jayathilage','2001-06-24','ad-011','br-001','j-010','dep-002','es-004','e-002','Single','2023-11-02 20:47:34','2023-11-02 20:47:34'),('e-004','Dulmi','Pabasara','2001-08-19','ad-012','br-001','j-011','dep-002','es-005','e-002','Single','2023-11-02 20:49:11','2023-11-02 20:49:11');
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -1124,7 +1122,7 @@ CREATE TABLE `leave_application` (
 
 LOCK TABLES `leave_application` WRITE;
 /*!40000 ALTER TABLE `leave_application` DISABLE KEYS */;
-INSERT INTO `leave_application` VALUES ('rq-001','lv-002','Sick','2023-10-31','2023-11-09','e-002','Accepted','e-003','2023-10-30 12:41:23','2023-10-29 21:35:27'),('rq-002','lv-004','going abroad for studies','2023-11-01','2023-11-03','e-002','Accepted','e-003','2023-10-31 05:47:01','2023-10-29 21:57:33'),('rq-003','lv-003','Lover pregnant','2023-11-01','2023-11-08','e-002','Declined','e-003','2023-10-30 12:41:14','2023-10-30 03:15:24'),('rq-004','lv-004','Temple','2023-10-30','2023-11-02','e-002','Accepted','e-003','2023-10-30 12:41:37','2023-10-30 08:47:18'),('rq-005','lv-003','I\'m pregnant','2023-10-30','2023-10-30','e-002','Declined','e-003','2023-10-30 12:40:55','2023-10-30 12:39:19'),('rq-006','lv-003','wife pregnant','2023-10-30','2023-11-02','e-002','Accepted','e-003','2023-10-30 14:23:19','2023-10-30 14:21:47'),('rq-007','lv-001','fun','2023-11-01','2023-11-07','e-002','Accepted','e-003','2023-11-01 00:01:24','2023-11-01 00:01:03'),('rq-008','lv-003','I\'m pregnant','2023-06-11','2023-06-20','e-002','Accepted','e-003','2023-11-01 00:47:00','2023-11-01 00:46:35'),('rq-009','lv-003','I\'m pregnant','2023-02-01','2023-02-15','e-002','Accepted','e-003','2023-11-01 07:56:11','2023-11-01 07:55:40'),('rq-010','lv-003','I\'m pregnant','2023-11-01','2023-11-15','e-005','Accepted','e-010','2023-11-01 14:23:15','2023-11-01 14:21:21');
+INSERT INTO `leave_application` VALUES ('rq-001','lv-001','Going on a vacation','2023-02-03','2023-02-06','e-002','Accepted','e-003','2023-11-02 21:11:06','2023-11-02 20:58:50'),('rq-002','lv-004','Dengue fever','2023-03-09','2023-03-13','e-002','Accepted','e-003','2023-11-02 21:08:52','2023-11-02 20:59:59'),('rq-003','lv-003','Child delivery','2023-06-06','2023-06-30','e-002','Accepted','e-004','2023-11-02 21:12:20','2023-11-02 21:02:31'),('rq-004','lv-001','Going abroad for an event','2023-09-13','2023-09-20','e-002','Accepted','e-004','2023-11-02 21:12:10','2023-11-02 21:03:10'),('rq-005','lv-002','Marriage function','2023-09-01','2023-09-10','e-002','Accepted','e-004','2023-11-02 21:46:09','2023-11-02 21:45:50');
 /*!40000 ALTER TABLE `leave_application` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -1185,44 +1183,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `update_num_of_leaves1` AFTER UPDATE ON `leave_application` FOR EACH ROW BEGIN
-    IF NEW.req_status = 'Accepted' THEN
-		IF new.leave_type_id='lv-001' then 
-			UPDATE leave_record
-			SET no_of_annual_leaves_taken = no_of_annual_leaves_taken + 1
-			WHERE leave_record.emp_id = new.emp_id;
-		end if;
-        IF new.leave_type_id='lv-002' then 
-			UPDATE leave_record
-			SET no_of_casual_leaves_taken = no_of_casual_leaves_taken + 1
-			WHERE leave_record.emp_id = new.emp_id;
-		end if;
-        IF new.leave_type_id='lv-003' then 
-			UPDATE leave_record
-			SET no_of_maternity_leaves_taken = no_of_maternity_leaves_taken + 1
-			WHERE leave_record.emp_id = new.emp_id;
-		end if;
-        IF new.leave_type_id='lv-004' then 
-			UPDATE leave_record
-			SET no_of_nopay_leaves_taken = no_of_nopay_leaves_taken + 1
-			WHERE leave_record.emp_id = new.emp_id;
-		end if;
-    END IF;
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Temporary view structure for view `leave_application_view`
@@ -1262,6 +1222,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `leave_type_name`,
  1 AS `total_no_of_leaves_taken`,
  1 AS `total_no_of_permitted_days`,
+ 1 AS `no_of_pending_leaves`,
  1 AS `percentage_leaves_taken`*/;
 SET character_set_client = @saved_cs_client;
 
@@ -1393,7 +1354,7 @@ CREATE TABLE `number_of_leaves` (
 
 LOCK TABLES `number_of_leaves` WRITE;
 /*!40000 ALTER TABLE `number_of_leaves` DISABLE KEYS */;
-INSERT INTO `number_of_leaves` VALUES (1,'lv-001',5,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(1,'lv-002',10,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(1,'lv-003',300,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(1,'lv-004',5,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(2,'lv-001',10,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(2,'lv-002',15,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(2,'lv-003',300,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(2,'lv-004',15,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(3,'lv-001',20,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(3,'lv-002',10,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(3,'lv-003',300,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(3,'lv-004',15,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(4,'lv-001',20,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(4,'lv-002',20,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(4,'lv-003',300,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(4,'lv-004',20,'2023-10-27 18:41:29','2023-10-27 18:41:29');
+INSERT INTO `number_of_leaves` VALUES (1,'lv-001',5,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(1,'lv-002',10,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(1,'lv-003',200,'2023-11-02 22:38:22','2023-10-27 18:41:29'),(1,'lv-004',5,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(2,'lv-001',10,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(2,'lv-002',15,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(2,'lv-003',300,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(2,'lv-004',15,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(3,'lv-001',20,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(3,'lv-002',10,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(3,'lv-003',200,'2023-11-02 22:38:22','2023-10-27 18:41:29'),(3,'lv-004',15,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(4,'lv-001',20,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(4,'lv-002',20,'2023-10-27 18:41:29','2023-10-27 18:41:29'),(4,'lv-003',200,'2023-11-02 22:38:22','2023-10-27 18:41:29'),(4,'lv-004',20,'2023-10-27 18:41:29','2023-10-27 18:41:29');
 /*!40000 ALTER TABLE `number_of_leaves` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -2285,7 +2246,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `leave_app_set` AS select `leave_application`.`req_id` AS `req_id`,`leave_application`.`leave_type_id` AS `leave_type_id`,`leave_type_names`.`leave_type_name` AS `leave_type_name`,`leave_application`.`reason` AS `reason`,`leave_application`.`start_date` AS `start_date`,`leave_application`.`end_date` AS `end_date`,(to_days(`leave_application`.`end_date`) - to_days(`leave_application`.`start_date`)) AS `no_of_days`,`leave_application`.`supervisor_id` AS `supervisor_id`,`leave_application`.`req_status` AS `req_status`,`leave_application`.`emp_id` AS `emp_id`,`role`.`pay_grade` AS `pay_grade`,`number_of_leaves`.`default_days` AS `default_days`,`leave_application`.`created_at` AS `created_at`,`leave_application`.`updated_at` AS `updated_at` from ((((`leave_application` left join `employee` on((`leave_application`.`emp_id` = `employee`.`emp_id`))) left join `role` on((`employee`.`job_id` = `role`.`job_id`))) left join `number_of_leaves` on(((`leave_application`.`leave_type_id` = `number_of_leaves`.`leave_type_id`) and (`role`.`pay_grade` = `number_of_leaves`.`pay_grade`)))) left join `leave_type_names` on((`leave_application`.`leave_type_id` = `leave_type_names`.`leave_type_id`))) */;
+/*!50001 VIEW `leave_app_set` AS select `leave_application`.`req_id` AS `req_id`,`leave_application`.`leave_type_id` AS `leave_type_id`,`leave_type_names`.`leave_type_name` AS `leave_type_name`,`leave_application`.`reason` AS `reason`,`leave_application`.`start_date` AS `start_date`,`leave_application`.`end_date` AS `end_date`,((to_days(least(`leave_application`.`end_date`,concat(year(curdate()),'-12-31'))) - to_days(greatest(`leave_application`.`start_date`,concat(year(curdate()),'-01-01')))) + 1) AS `no_of_days`,`leave_application`.`supervisor_id` AS `supervisor_id`,`leave_application`.`req_status` AS `req_status`,`leave_application`.`emp_id` AS `emp_id`,`role`.`pay_grade` AS `pay_grade`,`number_of_leaves`.`default_days` AS `default_days`,`leave_application`.`created_at` AS `created_at`,`leave_application`.`updated_at` AS `updated_at` from ((((`leave_application` left join `employee` on((`leave_application`.`emp_id` = `employee`.`emp_id`))) left join `role` on((`employee`.`job_id` = `role`.`job_id`))) left join `number_of_leaves` on(((`leave_application`.`leave_type_id` = `number_of_leaves`.`leave_type_id`) and (`role`.`pay_grade` = `number_of_leaves`.`pay_grade`)))) left join `leave_type_names` on((`leave_application`.`leave_type_id` = `leave_type_names`.`leave_type_id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2321,7 +2282,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `leave_count_per_employee_view` AS select `employee`.`emp_id` AS `emp_id`,`number_of_leaves`.`leave_type_id` AS `leave_type_id`,`leave_type_names`.`leave_type_name` AS `leave_type_name`,ifnull(`leave_count_set`.`total_no_of_leaves_taken`,0) AS `total_no_of_leaves_taken`,`number_of_leaves`.`default_days` AS `total_no_of_permitted_days`,((ifnull(`leave_count_set`.`total_no_of_leaves_taken`,0) / `number_of_leaves`.`default_days`) * 100) AS `percentage_leaves_taken` from ((((`employee` left join `role` on((`employee`.`job_id` = `role`.`job_id`))) join `number_of_leaves` on((`role`.`pay_grade` = `number_of_leaves`.`pay_grade`))) left join `leave_type_names` on((`number_of_leaves`.`leave_type_id` = `leave_type_names`.`leave_type_id`))) left join `leave_count_set` on(((`employee`.`emp_id` = `leave_count_set`.`emp_id`) and (`number_of_leaves`.`leave_type_id` = `leave_count_set`.`leave_type_id`)))) order by `employee`.`emp_id`,`number_of_leaves`.`leave_type_id` */;
+/*!50001 VIEW `leave_count_per_employee_view` AS select `employee`.`emp_id` AS `emp_id`,`number_of_leaves`.`leave_type_id` AS `leave_type_id`,`leave_type_names`.`leave_type_name` AS `leave_type_name`,ifnull(`leave_count_set`.`total_no_of_leaves_taken`,0) AS `total_no_of_leaves_taken`,`number_of_leaves`.`default_days` AS `total_no_of_permitted_days`,(`number_of_leaves`.`default_days` - ifnull(`leave_count_set`.`total_no_of_leaves_taken`,0)) AS `no_of_pending_leaves`,((ifnull(`leave_count_set`.`total_no_of_leaves_taken`,0) / `number_of_leaves`.`default_days`) * 100) AS `percentage_leaves_taken` from ((((`employee` left join `role` on((`employee`.`job_id` = `role`.`job_id`))) join `number_of_leaves` on((`role`.`pay_grade` = `number_of_leaves`.`pay_grade`))) left join `leave_type_names` on((`number_of_leaves`.`leave_type_id` = `leave_type_names`.`leave_type_id`))) left join `leave_count_set` on(((`employee`.`emp_id` = `leave_count_set`.`emp_id`) and (`number_of_leaves`.`leave_type_id` = `leave_count_set`.`leave_type_id`)))) order by `employee`.`emp_id`,`number_of_leaves`.`leave_type_id` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2375,7 +2336,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `yearly_leave_count_view` AS select `s`.`emp_id` AS `emp_id`,sum(`s`.`jan`) AS `jan`,sum(`s`.`feb`) AS `feb`,sum(`s`.`mar`) AS `mar`,sum(`s`.`apr`) AS `apr`,sum(`s`.`may`) AS `may`,sum(`s`.`jun`) AS `jun`,sum(`s`.`jul`) AS `jul`,sum(`s`.`aug`) AS `aug`,sum(`s`.`sep`) AS `sep`,sum(`s`.`oct`) AS `oct`,sum(`s`.`nov`) AS `nov`,sum(`s`.`dece`) AS `dece` from (select `leave_application_view`.`req_id` AS `req_id`,`leave_application_view`.`start_date` AS `start_date`,`leave_application_view`.`end_date` AS `end_date`,greatest((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-01-31'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-01-01')))),0) AS `jan`,greatest((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-02-28'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-02-01')))),0) AS `feb`,greatest((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-03-31'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-03-01')))),0) AS `mar`,greatest((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-04-30'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-04-01')))),0) AS `apr`,greatest((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-05-31'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-05-01')))),0) AS `may`,greatest((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-06-30'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-06-01')))),0) AS `jun`,greatest((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-07-31'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-07-01')))),0) AS `jul`,greatest((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-08-31'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-08-01')))),0) AS `aug`,greatest((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-09-30'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-09-01')))),0) AS `sep`,greatest((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-10-31'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-10-01')))),0) AS `oct`,greatest((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-11-30'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-11-01')))),0) AS `nov`,greatest((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-12-31'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-12-01')))),0) AS `dece`,`leave_application_view`.`req_status` AS `req_status`,`leave_application_view`.`emp_id` AS `emp_id` from `leave_application_view` where (`leave_application_view`.`req_status` = 'Accepted')) `s` group by `s`.`emp_id` */;
+/*!50001 VIEW `yearly_leave_count_view` AS select `s`.`emp_id` AS `emp_id`,sum(`s`.`jan`) AS `jan`,sum(`s`.`feb`) AS `feb`,sum(`s`.`mar`) AS `mar`,sum(`s`.`apr`) AS `apr`,sum(`s`.`may`) AS `may`,sum(`s`.`jun`) AS `jun`,sum(`s`.`jul`) AS `jul`,sum(`s`.`aug`) AS `aug`,sum(`s`.`sep`) AS `sep`,sum(`s`.`oct`) AS `oct`,sum(`s`.`nov`) AS `nov`,sum(`s`.`dece`) AS `dece` from (select `leave_application_view`.`req_id` AS `req_id`,`leave_application_view`.`start_date` AS `start_date`,`leave_application_view`.`end_date` AS `end_date`,greatest(((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-01-31'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-01-01')))) + 1),0) AS `jan`,greatest(((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-02-28'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-02-01')))) + 1),0) AS `feb`,greatest(((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-03-31'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-03-01')))) + 1),0) AS `mar`,greatest(((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-04-30'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-04-01')))) + 1),0) AS `apr`,greatest(((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-05-31'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-05-01')))) + 1),0) AS `may`,greatest(((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-06-30'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-06-01')))) + 1),0) AS `jun`,greatest(((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-07-31'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-07-01')))) + 1),0) AS `jul`,greatest(((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-08-31'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-08-01')))) + 1),0) AS `aug`,greatest(((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-09-30'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-09-01')))) + 1),0) AS `sep`,greatest(((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-10-31'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-10-01')))) + 1),0) AS `oct`,greatest(((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-11-30'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-11-01')))) + 1),0) AS `nov`,greatest(((to_days(least(`leave_application_view`.`end_date`,concat(year(curdate()),'-12-31'))) - to_days(greatest(`leave_application_view`.`start_date`,concat(year(curdate()),'-12-01')))) + 1),0) AS `dece`,`leave_application_view`.`req_status` AS `req_status`,`leave_application_view`.`emp_id` AS `emp_id` from `leave_application_view` where (`leave_application_view`.`req_status` = 'Accepted')) `s` group by `s`.`emp_id` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2389,4 +2350,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-01 19:59:50
+-- Dump completed on 2023-11-03  4:44:06

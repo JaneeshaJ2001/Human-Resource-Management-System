@@ -211,7 +211,7 @@ const RegisterForm = () => {
                   attribute_name: row.attribute_name,
                   attribute_description: row.description,
                   attribute_value: "",
-                  attribute_status: false,
+                  attribute_status: true,
                 };
               })
             );
@@ -418,7 +418,7 @@ const RegisterForm = () => {
               {customAttributes.map((attribute) => {
                 return (
                   <div>
-                    <Checkbox
+                    {/* <Checkbox
                       checked={attribute.attribute_status}
                       id={attribute.attribute_id}
                       onChange={(e) => {
@@ -438,7 +438,7 @@ const RegisterForm = () => {
                           })
                         );
                       }}
-                    />
+                    /> */}
                     <TextField
                       disabled={!attribute.attribute_status}
                       required={attribute.attribute_status}
