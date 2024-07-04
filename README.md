@@ -38,7 +38,7 @@ This project is a Human Resource Management System (HRM) designed for Jupiter Ap
 
 1. Clone the repository:
    ```plaintext
-    https://github.com/chathura-de-silva/E-Commerce-Platform
+    https://github.com/JaneeshaJ2001/Human-Resource-Management-System.git
     ```
 2. Install dependencies for frontend and backend:
    ```plaintext
